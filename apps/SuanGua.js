@@ -220,7 +220,8 @@ async function generateFortune(e) {
     const imgElement = await page.$('.tu img');
     // 对图片元素进行截图
     const image = await imgElement.screenshot();
-    e.reply(segment.image(image))
+    const mgs = Buffer.from(image)
+    e.reply(segment.image(mgs))
   } catch (error) {
     logger.info('图片渲染失败');
   } finally {
