@@ -1,4 +1,4 @@
-import { getFunctionData } from '../utils/getdate.js'
+import { getFunctionData, getImageUrl } from '../utils/getdate.js'
 
 export class example extends plugin {
     constructor() {
@@ -34,12 +34,14 @@ export class example extends plugin {
           }
   
           logger.info(`[今日新闻]开始推送……`);
+
+          let imageUrl = await getImageUrl(this.newsConfig.SourceUrl);  
           for (let i = 0; i < this.newsConfig.PushGroupList.length; i++) {
               // 添加延迟以防止消息发送过快
               setTimeout(async () => {
                   const group = Bot.pickGroup(this.newsConfig.PushGroupList[i]);
                   logger.info(`[今日新闻]正在向群组 ${group} 推送新闻。`);
-                  await group.sendMsg([segment.image(newsimageUrl)]);
+                  await group.sendMsg([segment.image(imageUrl)]);
                   logger.info(`[今日新闻]新闻已成功推送到群组 ${group}。`);
               }, i * 1000); 
           }
@@ -54,12 +56,10 @@ export class example extends plugin {
   
     async 今日新闻 (e) {
   
-      e.reply([segment.image(newsimageUrl)]);
+      let imageUrl = await getImageUrl(this.newsConfig.SourceUrl);  
+      e.reply([segment.image(imageUrl)]);
   
       return true
     }
   
   }
-  
-  const newsimageUrl = 'https://dayu.qqsuu.cn/weiyujianbao/apis.php';// 60s新闻图片的 URL
-  //打工人日历 
