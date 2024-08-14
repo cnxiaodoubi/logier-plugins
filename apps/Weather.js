@@ -48,7 +48,8 @@ export class example extends plugin {
     logger.info(this.Config.WeatherPushgroup)
 
     const image = await pushweather(e);  // 添加了 await
-    e.reply([segment.image(image)]);    
+    const mgs = Buffer.from(image);
+    e.reply([segment.image(mgs)]);    
 
     return true
   }
