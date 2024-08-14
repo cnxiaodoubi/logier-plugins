@@ -69,6 +69,11 @@ export class TextMsg extends plugin {
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>Document</title>
+      <style>
+      @font-face {
+     font-family: zkkl;
+     src: url("../css/zkkl.TTF");
+      </style>
     </head>
     <body>
       <div id="main">

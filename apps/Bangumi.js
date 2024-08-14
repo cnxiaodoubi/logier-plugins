@@ -119,6 +119,11 @@ async function test() {
     <html>
     <head>
         <title>Items Display</title>
+            <style>
+      @font-face {
+     font-family: zkkl;
+     src: url("../css/zkkl.TTF");
+      </style>
         <style>
             * {
             padding: 0;
