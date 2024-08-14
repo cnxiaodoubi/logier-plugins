@@ -3,21 +3,24 @@ Push:
     isAutoPush: false
     PushTime: 0 0 */1 * * ?
     PushGroupList: []
+    SourceUrl: null
   - FunctionName: 摸鱼日历
     isAutoPush: false
     PushTime: 0 30 9 * * ?
     PushGroupList: []
+    SourceUrl: https://api.vvhan.com/api/moyu?type=image
   - FunctionName: 今日新闻
     isAutoPush: false
     PushTime: 0 30 7 * * ?
     PushGroupList: []
+    SourceUrl: https://dayu.qqsuu.cn/weiyujianbao/apis.php
   - FunctionName: 今日番剧
     isAutoPush: false
     PushTime: 0 30 18 * * ?
     PushGroupList: []
+    SourceUrl: null
   - FunctionName: 订阅小说
     isAutoPush: false
     PushTime: 0 0/10 * * * ?
     PushGroupList: []
-
-    
+    SourceUrl: null
