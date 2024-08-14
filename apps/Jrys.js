@@ -157,7 +157,8 @@ async function generateFortune(e) {
     const page = await browser.newPage();
     await page.setContent(Html)
     const image = await page.screenshot({fullPage: true })
-    e.reply(segment.image(image))
+    const mgs = Buffer.from(image);
+    e.reply(segment.image(mgs))
   } catch (error) {
     logger.info('图片渲染失败，使用文本发送');
     e.reply([segment.at(e.user_id), `的${await numToChinese(new Date().getDate())}号运势为……\n${fortune.fortuneSummary}\n${fortune.luckyStar}\n${fortune.signText}\n${fortune.unsignText}`]);
@@ -167,15 +168,3 @@ async function generateFortune(e) {
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
- 
