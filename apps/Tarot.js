@@ -153,7 +153,8 @@ try {
 
   await page.setContent(Html)
   const tarotimage = await page.screenshot({fullPage: true })
-  e.reply([segment.image(tarotimage)])
+  const mgs = Buffer.from(tarotimage)
+  e.reply([segment.image(mgs)])
 
 } catch (error) {
     logger.error(error);
