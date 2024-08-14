@@ -1,5 +1,5 @@
 
-# 鸢尾花插件(logier-plugin)
+# 鸢尾花插件(logier-plugin) 分支版
 
 <div align="center">
   <a href="https://logier.gitee.io/">
@@ -30,10 +30,7 @@ gitee
 ```
 git clone --depth=1 https://gitee.com/cnxiaodoubi/logier-plugins ./plugins/logier-plugin/
 ```
-github
-```
-git clone --depth=1 https://github.com/logier/logier-plugins.git ./plugins/logier-plugin/
-```
+
 
 ## 插件功能 👓
 
@@ -197,6 +194,7 @@ git clone --depth=1 https://github.com/logier/logier-plugins.git ./plugins/logie
 
 ### 小修系列
 
+准备重新写小时系列代码
 <details> <summary>进退群通知</summary>
 
 - 修改自官方插件。
