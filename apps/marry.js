@@ -268,7 +268,8 @@ async function generateFortune(e,replyMessage,content,imageUrl) {
     const page = await browser.newPage();
     await page.setContent(Html)
     const image = await page.screenshot({fullPage: true })
-    e.reply([replyMessage, segment.image(image)] , true)
+    const mgs = Buffer.from(image);
+    e.reply([replyMessage, segment.image(mgs)] , true)
     } catch (error) {
     logger.info('[今日老婆]：图片渲染失败，使用文本发送');
     } finally {
