@@ -1,4 +1,4 @@
-import { getFunctionData } from '../utils/getdate.js'
+import { getFunctionData, getImageUrl } from '../utils/getdate.js'
 import fetch from 'node-fetch';
 
 export class example extends plugin {
@@ -32,15 +32,12 @@ export class example extends plugin {
     if (!this.moyuConfig.isAutoPush) {return false}
   
     
-    let fetchUrl = await fetch(moyuapiUrl).catch(err => logger.error(err));
-    let imgUrl = await fetchUrl.json();
-    imgUrl = await imgUrl.img;
-    imgUrl = imgUrl.replace("data:image/png;base64,", "base64://");
-
     logger.info(`[摸鱼日历]开始推送……`);
+    let imageUrl = await getImageUrl(this.moyuConfig.SourceUrl);  
+
     for (let i = 0; i < this.moyuConfig.PushGroupList.length; i++) {
       setTimeout(() => {
-        Bot.pickGroup(this.moyuConfig.PushGroupList[i]).sendMsg([segment.image(imgUrl)]);
+        Bot.pickGroup(this.moyuConfig.PushGroupList[i]).sendMsg([segment.image(imageUrl)]);
       }, 1 * 1000); 
     }
 
@@ -48,19 +45,12 @@ export class example extends plugin {
   }
 
   async 摸鱼日历 (e) {
-    let fetchUrl = await fetch(moyuapiUrl).catch(err => logger.error(err));
-    let imgUrl = await fetchUrl.json();
-    imgUrl = await imgUrl.img;
-    imgUrl = imgUrl.replace("data:image/png;base64,", "base64://");
+    let imageUrl = await getImageUrl(this.moyuConfig.SourceUrl);  
 
-    e.reply([segment.image(imgUrl)]);
+    e.reply([segment.image(imageUrl)]);
 
     return true
 }
 
 
 }
-
-const moyuapiUrl = 'https://root.zhuayuya.com:8325/get_calendar';// 摸鱼日历接口地址
-
-
