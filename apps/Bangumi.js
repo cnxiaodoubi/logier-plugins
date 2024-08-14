@@ -39,7 +39,8 @@ export class TextMsg extends plugin {
           const page = await browser.newPage();
           await page.setContent(html)
           const image = await page.screenshot({fullPage: true })
-          e.reply(segment.image(image))
+          const msg = Buffer.from(image);
+          e.reply(segment.image(msg))
         } catch (error) {
           logger.info('图片渲染失败');
         } finally {
@@ -63,13 +64,14 @@ export class TextMsg extends plugin {
            const page = await browser.newPage();
            await page.setContent(html)
            const image = await page.screenshot({fullPage: true })
+           const msg = Buffer.from(image);
            logger.info(this.BangumiConfig.PushGroupList)
 
             for (let i = 0; i < this.BangumiConfig.PushGroupList.length; i++) {
                 setTimeout(async () => {
                     const group = Bot.pickGroup(this.BangumiConfig.PushGroupList[i]);
                     logger.info(`[今日番剧]正在向群组 ${group} 推送番剧。`);
-                    await group.sendMsg([segment.image(image)]);
+                    await group.sendMsg([segment.image(msg)]);
                     logger.info(`[今日番剧]番剧已成功推送到群组 ${group}。`);
                 }, i * 3000); 
             }
