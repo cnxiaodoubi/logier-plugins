@@ -24,7 +24,7 @@
 ## 安装教程 ✨
 
 
-Yunzai-Bot目录下执行(二者选其一)
+Yunzai-Bot目录下执行
 
 gitee
 ```
