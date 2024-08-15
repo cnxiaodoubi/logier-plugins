@@ -1,10 +1,16 @@
 
 # 鸢尾花插件(logier-plugin) 分支版
-
 <div align="center">
   <a href="https://logier.gitee.io/">
     <img src="./resources/img/logo.png" alt="Logo" height="120">
   </a>
+<br>
+
+ [![Group](https://img.shields.io/badge/QQ-blue?style=flat&labelColor=white&logo=tencentqq&logoColor=black)](https://qm.qq.com/cgi-bin/qm/qr?k=Tx0KJBxwamQ1slXC4d3ZVhSigQ9MiCmJ&jump_from=webapi&authKey=BJVVNjuciQCnetGahh3pNOirLULs1XA7fQMn/LlPWAWk5GDdr2WWB/zHim1k1OoY) &nbsp; [![Group](https://img.shields.io/badge/博客-blue?style=flat&labelColor=white&logo=hexo&logoColor=black)](https://logier.gitee.io/) &nbsp;(https://gitee.com/logier/emojihub/) &nbsp; <a href='https://gitee.com/logier/logier-plugins/stargazers'><img src='https://gitee.com/logier/logier-plugins/badge/star.svg?theme=dark' alt='star'></img></a> &nbsp; 
+
+ <img src="https://count.getloli.com/get/@:logier?theme=moebooru-h" alt=":logier" />
+</div>
+<br>
 
 
  
