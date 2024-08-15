@@ -267,9 +267,8 @@ async function generateFortune(e,replyMessage,content,imageUrl) {
     browser = await puppeteer.launch({headless: 'new', args: ['--no-sandbox', '--disable-setuid-sandbox'] });
     const page = await browser.newPage();
     await page.setContent(Html)
-    const image = await page.screenshot({fullPage: true })
-    const mgs = Buffer.from(image);
-    e.reply([replyMessage, segment.image(mgs)] , true)
+    const image = Buffer.from(await page.screenshot({fullPage: true }))
+    e.reply([replyMessage, segment.image(image)] , true)
     } catch (error) {
     logger.info('[今日老婆]：图片渲染失败，使用文本发送');
     } finally {
