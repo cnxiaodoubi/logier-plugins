@@ -38,9 +38,8 @@ export class TextMsg extends plugin {
           browser = await puppeteer.launch({headless: 'new', args: ['--no-sandbox','--disable-setuid-sandbox'] });
           const page = await browser.newPage();
           await page.setContent(html)
-          const image = await page.screenshot({fullPage: true })
-          const msg = Buffer.from(image);
-          e.reply(segment.image(msg))
+          const image = Buffer.from(await page.screenshot({fullPage: true }))
+          e.reply(segment.image(image))
         } catch (error) {
           logger.info('图片渲染失败');
         } finally {
