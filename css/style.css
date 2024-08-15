@@ -1,0 +1,300 @@
+/**准备合并CSS **/
+/*代码预留*/
+/* 此代码未启用*/
+
+
+
+
+
+
+
+@font-face {
+    font-family: AlibabaPuHuiTi-2-55-Regular;
+    src:url(https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlibabaPuHuiTi-2/AlibabaPuHuiTi-2-55-Regular/AlibabaPuHuiTi-2-55-Regular.woff2) format('woff2');
+  }  
+  html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'AlibabaPuHuiTi-2-55-Regular', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+  } 
+
+* {
+    padding: 0;
+    margin: 0;
+    }
+    .item {
+        border: 1px solid #ddd;
+        margin: auto;
+        padding: 5px;
+        width: 80%;
+        flex-direction: row;
+        display: flex !important;
+    }
+    .item img {
+        width: auto;
+        height: 100%;
+        padding-right: 5%; 
+    }
+    .header {
+        width: 100%;
+        text-align: center;
+        background: no-repeat url("${await getImageUrl(['./plugins/logier-plugin/resources/gallery/114388636.webp'])}");
+        background-size: cover;
+    }
+
+      html,
+    body {
+      width: 900px;
+    }
+    #main {
+      display: grid;
+      grid-template-areas: "i";
+      width: 900px;
+      overflow: hidden;
+    }
+    #cav {
+      grid-area: i;
+      z-index: -1;
+      /* visibility: hidden; */
+      width: 100%;
+      height: 100%;
+    }
+    #wrapper {
+      grid-area: i;
+      display: grid;
+      grid-template-columns: 30% 70%;
+    }
+    #left {
+      padding: 10px;
+    }
+    #right {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #cont_img {
+      width: 90%;
+      border-radius: 10px;
+      filter: drop-shadow(0px 0px 10px black);
+    }
+    .img_around {
+      width: 80%;
+      height: 60px;
+    }
+    #img_top {
+      display: flex;
+      justify-content: end;
+      align-items: end;
+      padding: 10px;
+    }
+    #date_text {
+      font-size: 36px;
+      font-weight: bold;
+      color: white;
+      filter: drop-shadow(1px 1px 0px black);
+    }
+
+    html {
+      line-height: 1.15; /* 1 */
+      -webkit-text-size-adjust: 100%; /* 2 */
+    }
+    body {
+      margin: 0;
+    }
+    main {
+      display: block;
+    }
+    h1 {
+      font-size: 2em;
+      margin: 0.67em 0;
+    }
+    hr {
+      box-sizing: content-box; /* 1 */
+      height: 0; /* 1 */
+      overflow: visible; /* 2 */
+    }
+    pre {
+      font-family: monospace, monospace; /* 1 */
+      font-size: 1em; /* 2 */
+    }
+    a {
+      background-color: transparent;
+    }
+    abbr[title] {
+      border-bottom: none; /* 1 */
+      text-decoration: underline; /* 2 */
+      text-decoration: underline dotted; /* 2 */
+    }
+    b,
+    strong {
+      font-weight: bolder;
+    }
+    code,
+    kbd,
+    samp {
+      font-family: monospace, monospace; /* 1 */
+      font-size: 1em; /* 2 */
+    }
+    small {
+      font-size: 80%;
+    }
+    sub,
+    sup {
+      font-size: 75%;
+      line-height: 0;
+      position: relative;
+      vertical-align: baseline;
+    }
+    sub {
+      bottom: -0.25em;
+    }
+    sup {
+      top: -0.5em;
+    }
+    img {
+      border-style: none;
+    }
+    button,
+    input,
+    optgroup,
+    select,
+    textarea {
+      font-family: inherit;
+      font-size: 100%;
+      line-height: 1.15;
+      margin: 0;
+    }
+    button,
+    input {
+      overflow: visible;
+    }
+    button,
+    select {
+      text-transform: none;
+    }
+    button,
+    [type="button"],
+    [type="reset"],
+    [type="submit"] {
+      -webkit-appearance: button;
+    }
+    button::-moz-focus-inner,
+    [type="button"]::-moz-focus-inner,
+    [type="reset"]::-moz-focus-inner,
+    [type="submit"]::-moz-focus-inner {
+      border-style: none;
+      padding: 0;
+    }
+    button:-moz-focusring,
+    [type="button"]:-moz-focusring,
+    [type="reset"]:-moz-focusring,
+    [type="submit"]:-moz-focusring {
+      outline: 1px dotted ButtonText1;
+    }
+    fieldset {
+      padding: 0.35em 0.75em 0.625em;
+    }
+    legend {
+      box-sizing: border-box; /* 1 */
+      color: inherit; /* 2 */
+      display: table; /* 1 */
+      max-width: 100%; /* 1 */
+      padding: 0; /* 3 */
+      white-space: normal; /* 1 */
+    }
+    progress {
+      vertical-align: baseline;
+    }
+    textarea {
+      overflow: auto;
+    }
+    [type="checkbox"],
+    [type="radio"] {
+      box-sizing: border-box; /* 1 */
+      padding: 0; /* 2 */
+    }
+    [type="number"]::-webkit-inner-spin-button,
+    [type="number"]::-webkit-outer-spin-button {
+      height: auto;
+    }
+    [type="search"] {
+      -webkit-appearance: textfield; /* 1 */
+      outline-offset: -2px; /* 2 */
+    }
+    [type="search"]::-webkit-search-decoration {
+      -webkit-appearance: none;
+    }
+    ::-webkit-file-upload-button {
+      -webkit-appearance: button; /* 1 */
+      font: inherit; /* 2 */
+    }
+    details {
+      display: block;
+    }
+    summary {
+      display: list-item;
+    }
+    template {
+      display: none;
+    }
+    [hidden] {
+      display: none;
+    }
+    * {
+        padding: 0;
+        margin: 0;
+      }
+      html {
+      font-family: 'AlibabaPuHuiTi-2-55-Regular', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+    }
+      body{
+        position:absolute;
+      }
+      .nei{
+        float: left;
+        box-shadow: 3px 3px 3px #666666;
+        width: 50%;
+        min-width: 400px;
+        height:100%;
+        display:flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border-radius:10px 10px 10px 10px;
+        border:1px solid #a1a1a1;
+        background: rgba(255, 255, 255, 0.6);
+        z-index:1;
+        position:absolute;
+      }
+      p {
+        color : rgba(0,0,0, 0.5);
+        font-size:1.5rem;
+        padding: 2px; 
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        text-align: center; 
+        font-weight: bold;
+      }
+      .centered-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 1em;
+        height: 100%;
+      }
+      .tu{
+      float: left;
+        border:1px solid #000000;
+      }
+      img{
+        border:1px solid #000000;
+        border-radius:10px 10px 10px 10px;
+      }
+
+      html, body {
+        margin: 0;
+        padding: 0;
+        font-family: 'AlibabaPuHuiTi-2-55-Regular', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+    }    
