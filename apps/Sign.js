@@ -70,9 +70,10 @@ export class TextMsg extends plugin {
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>Document</title>
       <style>
-      @font-face {
-     font-family: zkkl;
-     src: url("../css/zkkl.TTF");
+    @font-face {
+      font-family: AlibabaPuHuiTi-2-55-Regular;
+      src:url(https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlibabaPuHuiTi-2/AlibabaPuHuiTi-2-55-Regular/AlibabaPuHuiTi-2-55-Regular.woff2) format('woff2');
+    }
       </style>
     </head>
     <body>
