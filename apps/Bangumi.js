@@ -1,6 +1,3 @@
-
-
-
 import puppeteer from "puppeteer";
 import { getFunctionData, getImageUrl } from '../utils/getdate.js'
 import fetch from 'node-fetch';

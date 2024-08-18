@@ -54,10 +54,8 @@ export class example extends plugin {
    // imgUrl = await imgUrl.img;
    // imgUrl = imgUrl.replace("data:image/png;base64,", "base64://");
    imgUrl = await imgUrl.url;
-
-    e.reply([segment.image(imgUrl)]);
-
-    return true
+   e.reply([segment.image(imgUrl)]);
+   return true
 }
 
 
