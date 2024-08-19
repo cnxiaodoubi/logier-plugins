@@ -1,68 +1,64 @@
-import puppeteer from "puppeteer";
+import puppeteer from 'puppeteer'
 import { getTimeOfDay, getImageUrl, getFunctionData } from '../utils/getdate.js'
-import fetch from 'node-fetch';
-
-
+import fetch from 'node-fetch'
 
 // TextMsg可自行更改，其他照旧即可。
 export class TextMsg extends plugin {
-  constructor() {
-      super({
-          name: '[鸢尾花插件]今日签到', // 插件名称
-          dsc: '今日签到',  // 插件描述            
-          event: 'message',  // 更多监听事件请参考下方的 Events
-          priority: 5000,   // 插件优先度，数字越小优先度越高
-          rule: [
-              {
-                  reg: '^#?(今日)?(签到|打卡)$',   // 正则表达式,有关正则表达式请自行百度
-                  fnc: '今日签到'  // 执行方法
-              }
-          ]
-      })
-
+  constructor () {
+    super({
+      name: '[鸢尾花插件]今日签到', // 插件名称
+      dsc: '今日签到', // 插件描述
+      event: 'message', // 更多监听事件请参考下方的 Events
+      priority: 5000, // 插件优先度，数字越小优先度越高
+      rule: [
+        {
+          reg: '^#?(今日)?(签到|打卡)$', // 正则表达式,有关正则表达式请自行百度
+          fnc: '今日签到' // 执行方法
+        }
+      ]
+    })
   }
 
   get UrlsConfig () { return getFunctionData('Urls', 'Urls', '今日签到') }
 
-  async 今日签到(e) {
+  async 今日签到 (e) {
+    let now = new Date()
+    let datatime = now.toLocaleDateString('zh-CN') // 日期格式
 
-  let now = new Date();
-  let datatime =  now.toLocaleDateString('zh-CN'); //日期格式
+    const response = await fetch('https://v1.hitokoto.cn')
+    const hitokodata = await response.json()
+    const content = hitokodata.hitokoto
 
-  const response = await fetch('https://v1.hitokoto.cn');
-  const hitokodata = await response.json();
-  const content = hitokodata.hitokoto;
-  
-  let imageUrl = await getImageUrl(this.UrlsConfig.imageUrls, './plugins/logier-plugin/resources/gallery/114388636.webp');  
+    let imageUrl = await getImageUrl(this.UrlsConfig.imageUrls, './plugins/logier-plugin/resources/gallery/114388636.webp')
 
-  let data = JSON.parse(await redis.get(`Yunzai:logier-plugin:${e.user_id}_sign`));
-  const addfavor = Math.floor(Math.random() * 10) + 1;
-  let  issign = `好感度+${addfavor}`
-  if (!data) {
-      data = { favor: addfavor, time: datatime };
-  } else if (data.time !== datatime) {
-      data.favor += addfavor;
-      data.time = datatime;
-  } else if (data.time == datatime) {
-     issign = `今日已经签到了`
-} 
-  
-  await redis.set(`Yunzai:logier-plugin:${e.user_id}_sign`, JSON.stringify(data));
-  let finaldata = JSON.parse(await redis.get(`Yunzai:logier-plugin:${e.user_id}_sign`));
-  
-  let groupdata = JSON.parse(await redis.get(`Yunzai:logier-plugin:group${e.group_id}_sign`)) || {};
-  groupdata[e.user_id] = data.favor;
+    let data = JSON.parse(await redis.get(`Yunzai:logier-plugin:${e.user_id}_sign`))
+    const addfavor = Math.floor(Math.random() * 10) + 1
+    let issign = `好感度+${addfavor}`
+    if (!data) {
+      data = { favor: addfavor, time: datatime }
+    } else if (data.time !== datatime) {
+      data.favor += addfavor
+      data.time = datatime
+    } else if (data.time == datatime) {
+      issign = '今日已经签到了'
+    }
 
-  await redis.set(`Yunzai:logier-plugin:group${e.group_id}_sign`, JSON.stringify(groupdata));
-  
-  let favorValues = Object.values(groupdata);
-  favorValues.sort((a, b) => b - a);
-  
-  let position = favorValues.indexOf(data.favor) + 1;
+    await redis.set(`Yunzai:logier-plugin:${e.user_id}_sign`, JSON.stringify(data))
+    let finaldata = JSON.parse(await redis.get(`Yunzai:logier-plugin:${e.user_id}_sign`))
 
-  let nickname = e.nickname ? e.nickname : e.sender.card
+    let groupdata = JSON.parse(await redis.get(`Yunzai:logier-plugin:group${e.group_id}_sign`)) || {}
+    groupdata[e.user_id] = data.favor
 
-  let Html = `
+    await redis.set(`Yunzai:logier-plugin:group${e.group_id}_sign`, JSON.stringify(groupdata))
+
+    let favorValues = Object.values(groupdata)
+    favorValues.sort((a, b) => b - a)
+
+    let position = favorValues.indexOf(data.favor) + 1
+
+    let nickname = e.nickname ? e.nickname : e.sender.card
+
+    let Html = `
   <!DOCTYPE html>
   <html lang="zh">
     <head>
@@ -378,39 +374,27 @@ export class TextMsg extends plugin {
       };
     }
   </script>
-          `;
- 
-    let browser;
+          `
+
+    let browser
     try {
       if (!imageUrl) {
-        throw new Error('无法获取图片URL');
+        throw new Error('无法获取图片URL')
       }
-      browser = await puppeteer.launch({headless: 'new', args: ['--no-sandbox', '--disable-setuid-sandbox'] });
-      const page = await browser.newPage();
+      browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox', '--disable-setuid-sandbox'] })
+      const page = await browser.newPage()
       await page.setContent(Html)
-      const imgElement = await page.$('#main');
+      const imgElement = await page.$('#main')
       // 对图片元素进行截图
-      const image = Buffer.from(await imgElement.screenshot());
+      const image = Buffer.from(await imgElement.screenshot())
       e.reply(segment.image(image))
     } catch (error) {
-      logger.info('图片渲染失败');
+      logger.info('图片渲染失败')
     } finally {
       if (browser) {
-        await browser.close();
+        await browser.close()
       }
     }
-    return true;
-
+    return true
+  }
 }
-
-}
-
-
-
-
-
-
-
-
-
-

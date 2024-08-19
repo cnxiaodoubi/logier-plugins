@@ -1,123 +1,117 @@
-import puppeteer from "puppeteer";
+import puppeteer from 'puppeteer'
 import { readAndParseJSON, getFunctionData, numToChinese, getImageUrl } from '../utils/getdate.js'
 
 export class TextMsg extends plugin {
-  constructor() {
-      super({
-          name: '[鸢尾花插件]今日运势', // 插件名称
-          dsc: '今日运势',  // 插件描述            
-          event: 'message',  // 更多监听事件请参考下方的 Events
-          priority: 5000,   // 插件优先度，数字越小优先度越高
-          rule: [
-              {
-                  reg: '^#?(今日运势|运势)$',   // 正则表达式,有关正则表达式请自行百度
-                  fnc: '今日运势'  // 执行方法
-              },
-              {
-                reg: '^#?(悔签|重新抽取运势)$',   // 正则表达式,有关正则表达式请自行百度
-                fnc: '悔签'  // 执行方法
-            }
-          ]
-      })
-
+  constructor () {
+    super({
+      name: '[鸢尾花插件]今日运势', // 插件名称
+      dsc: '今日运势', // 插件描述
+      event: 'message', // 更多监听事件请参考下方的 Events
+      priority: 5000, // 插件优先度，数字越小优先度越高
+      rule: [
+        {
+          reg: '^#?(今日运势|运势)$', // 正则表达式,有关正则表达式请自行百度
+          fnc: '今日运势' // 执行方法
+        },
+        {
+          reg: '^#?(悔签|重新抽取运势)$', // 正则表达式,有关正则表达式请自行百度
+          fnc: '悔签' // 执行方法
+        }
+      ]
+    })
   }
-  async 今日运势(e) {
 
-    let jrys = await readAndParseJSON('../data/jrys.json');
-    let now = new Date().toLocaleDateString('zh-CN');
-    let data = await redis.get(`Yunzai:logier-plugin:${e.user_id}_jrys`);
-    let replymessage = "正在为您测算今日的运势……";
-    
+  async 今日运势 (e) {
+    let jrys = await readAndParseJSON('../data/jrys.json')
+    let now = new Date().toLocaleDateString('zh-CN')
+    let data = await redis.get(`Yunzai:logier-plugin:${e.user_id}_jrys`)
+    let replymessage = '正在为您测算今日的运势……'
+
     if (data) {
-        data = JSON.parse(data);
+      data = JSON.parse(data)
     } else {
-        logger.info('未读取到运势数据，随机抽取');
-        data = {
-            fortune: jrys[Math.floor(Math.random() * jrys.length)],
-            time: now,
-            isRe: false
-        };
+      logger.info('未读取到运势数据，随机抽取')
+      data = {
+        fortune: jrys[Math.floor(Math.random() * jrys.length)],
+        time: now,
+        isRe: false
+      }
     }
-    
+
     if (now === data.time) {
-        logger.info('[今日运势]今日已抽取运势，读取保存的数据');
-        replymessage = "今日已抽取运势，让我帮你找找签……";
+      logger.info('[今日运势]今日已抽取运势，读取保存的数据')
+      replymessage = '今日已抽取运势，让我帮你找找签……'
     } else {
-        logger.info('[今日运势]日期已改变，重新抽取运势');
-        data = {
-            fortune: jrys[Math.floor(Math.random() * jrys.length)],
-            time: now,
-            isRe: false
-        };
+      logger.info('[今日运势]日期已改变，重新抽取运势')
+      data = {
+        fortune: jrys[Math.floor(Math.random() * jrys.length)],
+        time: now,
+        isRe: false
+      }
     }
-    
-    e.reply(replymessage, true, { recallMsg: 10 });
-    await redis.set(`Yunzai:logier-plugin:${e.user_id}_jrys`, JSON.stringify(data));
-    
+
+    e.reply(replymessage, true, { recallMsg: 10 })
+    await redis.set(`Yunzai:logier-plugin:${e.user_id}_jrys`, JSON.stringify(data))
+
     await generateFortune(e)
 
-    return true;
-    }
+    return true
+  }
 
+  async 悔签 (e) {
+    let jrys = await readAndParseJSON('../data/jrys.json')
+    let now = new Date().toLocaleDateString('zh-CN')
+    let data = await redis.get(`Yunzai:logier-plugin:${e.user_id}_jrys`)
+    let replymessage = '正在为您测算今日的运势……'
 
-  async 悔签(e) {
-
-    let jrys = await readAndParseJSON('../data/jrys.json');
-    let now = new Date().toLocaleDateString('zh-CN');
-    let data = await redis.get(`Yunzai:logier-plugin:${e.user_id}_jrys`);
-    let replymessage = "正在为您测算今日的运势……";
-
-    
     if (data) {
-        data = JSON.parse(data);
+      data = JSON.parse(data)
     } else {
-        logger.info('[今日运势]未读取到运势数据，悔签转为重新抽取运势');
-        data = {
-            fortune: jrys[Math.floor(Math.random() * jrys.length)],
-            time: now,
-            isRe: false
-        };
+      logger.info('[今日运势]未读取到运势数据，悔签转为重新抽取运势')
+      data = {
+        fortune: jrys[Math.floor(Math.random() * jrys.length)],
+        time: now,
+        isRe: false
+      }
     }
-    
-    if (now !== data.time) {
-        logger.info('[今日运势]日期变更，重新抽取运势');
-        data = {
-            fortune: jrys[Math.floor(Math.random() * jrys.length)],
-            time: now,
-            isRe: false
-        };
-    } else if (data.isRe) {
-        logger.info('[今日运势]今日已悔签，不重新抽取');
-        replymessage = "今天已经悔过签了,再给你看一眼吧……";
-    } else {
-        logger.info('[今日运势]悔签');
-        replymessage = "异象骤生，运势竟然改变了……";
-        data = {
-            fortune: jrys[Math.floor(Math.random() * jrys.length)],
-            time: now,
-            isRe: true
-        };
-    }
-    
-    e.reply(replymessage, true, { recallMsg: 10 });
-    await redis.set(`Yunzai:logier-plugin:${e.user_id}_jrys`, JSON.stringify(data));
-  
-   await generateFortune(e)
 
-    return true;
+    if (now !== data.time) {
+      logger.info('[今日运势]日期变更，重新抽取运势')
+      data = {
+        fortune: jrys[Math.floor(Math.random() * jrys.length)],
+        time: now,
+        isRe: false
+      }
+    } else if (data.isRe) {
+      logger.info('[今日运势]今日已悔签，不重新抽取')
+      replymessage = '今天已经悔过签了,再给你看一眼吧……'
+    } else {
+      logger.info('[今日运势]悔签')
+      replymessage = '异象骤生，运势竟然改变了……'
+      data = {
+        fortune: jrys[Math.floor(Math.random() * jrys.length)],
+        time: now,
+        isRe: true
+      }
+    }
+
+    e.reply(replymessage, true, { recallMsg: 10 })
+    await redis.set(`Yunzai:logier-plugin:${e.user_id}_jrys`, JSON.stringify(data))
+
+    await generateFortune(e)
+
+    return true
   }
 }
 
-
-
-async function generateFortune(e) {
-  const UrlsConfig = getFunctionData('Urls', 'Urls', '今日运势');
-  const imageUrl = await getImageUrl(UrlsConfig.imageUrls);  
+async function generateFortune (e) {
+  const UrlsConfig = getFunctionData('Urls', 'Urls', '今日运势')
+  const imageUrl = await getImageUrl(UrlsConfig.imageUrls)
 
   let nickname = e.nickname ? e.nickname : e.sender.card
 
-  let data = await redis.get(`Yunzai:logier-plugin:${e.user_id}_jrys`);
-  const fortune = JSON.parse(data).fortune;
+  let data = await redis.get(`Yunzai:logier-plugin:${e.user_id}_jrys`)
+  const fortune = JSON.parse(data).fortune
 
   let Html = `
   <html style="background: rgba(255, 255, 255, 0.6)">
@@ -149,33 +143,21 @@ async function generateFortune(e) {
       <img src=${imageUrl} style="height: 100%; filter: brightness(100%); overflow: hidden; display: inline-block; vertical-align: middle; margin: 0; padding: 0;"/>
     </div>
   </html>
-  `;
+  `
 
-  let browser;
+  let browser
   try {
-    browser = await puppeteer.launch({headless: 'new', args: ['--no-sandbox','--disable-setuid-sandbox'] });
-    const page = await browser.newPage();
+    browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox', '--disable-setuid-sandbox'] })
+    const page = await browser.newPage()
     await page.setContent(Html)
-    const image = Buffer.from(await page.screenshot({fullPage: true }))
+    const image = Buffer.from(await page.screenshot({ fullPage: true }))
     e.reply(segment.image(image))
   } catch (error) {
-    logger.info('图片渲染失败，使用文本发送');
-    e.reply([segment.at(e.user_id), `的${await numToChinese(new Date().getDate())}号运势为……\n${fortune.fortuneSummary}\n${fortune.luckyStar}\n${fortune.signText}\n${fortune.unsignText}`]);
+    logger.info('图片渲染失败，使用文本发送')
+    e.reply([segment.at(e.user_id), `的${await numToChinese(new Date().getDate())}号运势为……\n${fortune.fortuneSummary}\n${fortune.luckyStar}\n${fortune.signText}\n${fortune.unsignText}`])
   } finally {
     if (browser) {
-      await browser.close();
+      await browser.close()
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
- 
