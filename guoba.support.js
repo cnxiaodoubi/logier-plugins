@@ -224,7 +224,7 @@ export function supportGuoba() {
   {
     field: "API.API",
     label: "推送",
-    bottomHelpMessage: '设定推送功能  请不要动空白地方 还在完善中',
+    bottomHelpMessage: '设定推送功能',
     component: "GSubForm",
     componentProps: {
       multiple: true,
