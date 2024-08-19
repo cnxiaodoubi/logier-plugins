@@ -223,8 +223,8 @@ export function supportGuoba() {
   },
   {
     field: "API.API",
-    label: "推送",
-    bottomHelpMessage: '设定推送功能',
+    label: "设定",
+    bottomHelpMessage: '设定功能',
     component: "GSubForm",
     componentProps: {
       multiple: true,
@@ -239,8 +239,8 @@ export function supportGuoba() {
         },
         {
           field: 'SourceUrl',
-              label: '资源路径',
-          bottomHelpMessage: '资源路径,响应直接为image,支持重定向图链',
+          label: 'API链接',
+          bottomHelpMessage: '资源路径,响应直接为image,支持重定向图链,不要点击新增会有奇奇怪怪的bug',
           component: 'Input',
         },
         
