@@ -222,7 +222,7 @@ export function supportGuoba() {
     label: 'API相关设置'
   },
   {
-    field: "Push.Push",
+    field: "API.API",
     label: "推送",
     bottomHelpMessage: '设定推送功能  请不要动空白地方 还在完善中',
     component: "GSubForm",
@@ -234,7 +234,7 @@ export function supportGuoba() {
           label: "功能",
           component: 'Select',
           componentProps: {
-            options: push,
+          options: push,
           },
         },
         {

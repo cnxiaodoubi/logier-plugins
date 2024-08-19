@@ -23,7 +23,7 @@ export class example extends plugin {
       Object.defineProperty(this.task, 'log', { get: () => false })
   }
 
-  get moyuConfig () { return getFunctionData('Push', 'Push', '摸鱼日历') }
+  get moyuConfig () { return getFunctionData('API', 'API', '摸鱼日历') }
 
 
   // 定时任务
@@ -54,7 +54,7 @@ export class example extends plugin {
     // 判断是否为 Base64 图片
     if (imageUrl.startsWith('data:image/') && imageUrl.includes(';base64,')) {
       
-        // 如果是 Base64 图片
+        // 如果是 Base64 图片 也发不出去 
         
         e.reply([segment.image(imageUrl)]); // 直接发送 Base64 图片
     } else {

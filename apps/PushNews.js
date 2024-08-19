@@ -22,7 +22,7 @@ export class example extends plugin {
         Object.defineProperty(this.task, 'log', { get: () => false })
     }
   
-    get newsConfig () { return getFunctionData('Push', 'Push', '今日新闻') }
+    get newsConfig () { return getFunctionData('API', 'API', '今日新闻') }
   
   
     async 推送今日新闻 () {
