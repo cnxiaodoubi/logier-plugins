@@ -219,6 +219,9 @@ export function supportGuoba() {
 
 
 
+
+
+
   {
     component: 'Divider',
     label: '推送相关设置'
@@ -256,12 +259,7 @@ export function supportGuoba() {
           bottomHelpMessage: '推送群号',
           component: 'GSelectGroup',
         },
-        {
-          field: 'SourceUrl',
-          label: '资源路径',
-          bottomHelpMessage: '资源路径,响应直接为image,支持重定向图链',
-          component: 'Input',
-        },
+        
       ],
     },
   },
