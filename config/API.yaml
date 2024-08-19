@@ -1,5 +1,0 @@
-  API:
-  - FunctionName: 摸鱼日历
-    SourceUrl: https://api.vvhan.com/api/moyu
-  - FunctionName: 今日新闻
-    SourceUrl: https://dayu.qqsuu.cn/weiyujianbao.php
