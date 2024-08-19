@@ -45,12 +45,15 @@ export class example extends plugin {
   }
 
   async 摸鱼日历 (e) {
-    let imageUrl = await getImageUrl(this.moyuConfig.SourceUrl);  
-    
+   let imageUrl = await getImageUrl(this.moyuConfig.SourceUrl);  
+  // let fetchUrl= await getImageUrl(this.moyuConfig.SourceUrl).catch(err => logger.error(err));
+  // let imageUrl = await fetchUrl.json();
+ //  imageUrl = await imageUrl.img;
+   
 
     // 判断是否为 Base64 图片
     if (imageUrl.startsWith('data:image/') && imageUrl.includes(';base64,')) {
-
+      
         // 如果是 Base64 图片
         
         e.reply([segment.image(imageUrl)]); // 直接发送 Base64 图片
