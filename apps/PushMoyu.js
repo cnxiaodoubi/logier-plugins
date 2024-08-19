@@ -1,5 +1,5 @@
-import { getFunctionData } from '../utils/getdate.js'
-import fetch from 'node-fetch';
+import { getFunctionData, getImageUrl } from '../utils/getdate.js'
+
 
 export class example extends plugin {
   constructor() {
@@ -32,16 +32,12 @@ export class example extends plugin {
     if (!this.moyuConfig.isAutoPush) {return false}
   
     
-    let fetchUrl = await fetch(moyuapiUrl).catch(err => logger.error(err));
-    let imgUrl = await fetchUrl.json();
-   // imgUrl = await imgUrl.img;
-    //imgUrl = imgUrl.replace("data:image/png;base64,", "base64://");
-    imgUrl = await imgUrl.url;
-
     logger.info(`[摸鱼日历]开始推送……`);
+    let imageUrl = await getImageUrl(this.moyuConfig. SourceUrl);  
+
     for (let i = 0; i < this.moyuConfig.PushGroupList.length; i++) {
       setTimeout(() => {
-        Bot.pickGroup(this.moyuConfig.PushGroupList[i]).sendMsg([segment.image(imgUrl)]);
+        Bot.pickGroup(this.moyuConfig.PushGroupList[i]).sendMsg([segment.image(imageUrl)]);
       }, 1 * 1000); 
     }
 
@@ -49,16 +45,22 @@ export class example extends plugin {
   }
 
   async 摸鱼日历 (e) {
-    let fetchUrl = await fetch(moyuapiUrl).catch(err => logger.error(err));
-    let imgUrl = await fetchUrl.json();
-   // imgUrl = await imgUrl.img;
-   // imgUrl = imgUrl.replace("data:image/png;base64,", "base64://");
-   imgUrl = await imgUrl.url;
-   e.reply([segment.image(imgUrl)]);
-   return true
+    let imageUrl = await getImageUrl(this.moyuConfig.SourceUrl);  
+    
+
+    // 判断是否为 Base64 图片
+    if (imageUrl.startsWith('data:image/') && imageUrl.includes(';base64,')) {
+
+        // 如果是 Base64 图片
+        
+        e.reply([segment.image(imageUrl)]); // 直接发送 Base64 图片
+    } else {
+        // 如果不是 Base64 图片
+        e.reply([segment.image(imageUrl)]); // 直接发送普通图片
+    }
+
+    return true;
 }
 
 
 }
-
-const moyuapiUrl = 'https://api.vvhan.com/api/moyu?type=json';// 摸鱼日历接口地址

@@ -47,7 +47,7 @@ export class greetings extends plugin {
         const content = await gpt(gptmsg);   
       
         if (content == true) {
-          logger.info('[潜伏模板]key或url配置错误，')
+          logger.info('[潜伏模板]key或url配置错误')
           return false
         }
       
