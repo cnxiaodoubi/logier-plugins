@@ -217,7 +217,36 @@ export function supportGuoba() {
     },
   },
 
-
+  {
+    component: 'Divider',
+    label: 'API相关设置'
+  },
+  {
+    field: "Push.Push",
+    label: "推送",
+    bottomHelpMessage: '设定推送功能  请不要动空白地方 还在完善中',
+    component: "GSubForm",
+    componentProps: {
+      multiple: true,
+      schemas: [
+        {
+          field: "FunctionName",
+          label: "功能",
+          component: 'Select',
+          componentProps: {
+            options: push,
+          },
+        },
+        {
+          field: 'SourceUrl',
+              label: '资源路径',
+          bottomHelpMessage: '资源路径,响应直接为image,支持重定向图链',
+          component: 'Input',
+        },
+        
+      ],
+    },
+  },
 
 
 
