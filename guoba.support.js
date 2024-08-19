@@ -13,16 +13,15 @@ const EmojiIndexex = [{label: '表情包仓库', value: '表情包仓库'} , ...
 const personalitys = await readAndParseJSON('../data/personality.json');
 let personality = Object.keys(personalitys).map(k => ({label: k, value: k}));
 
-
 export function supportGuoba() {
 
   let allGroup = [];
   Bot.gl.forEach((v, k) => { allGroup.push({label: `${v.group_name}(${k})`, value: k}); });
-  allGroup.push({label: 'default', value: 'default'}); 
-  
+  allGroup.push({label: 'default', value: 'default'});
+
   let setimage = [{label: `定时发图`, value: `定时发图`},{label: `今日运势`, value: `今日运势`},{label: `算一卦`, value: `算一卦`},{label: `今日签到`, value: `今日签到`},{label: `城市天气`, value: `城市天气`},{label: `default`, value: `default`}]
 
-  let push = [{label: `定时发图`, value: `定时发图`},{label: `摸鱼日历`, value: `摸鱼日历`},{label: `今日新闻`, value: `今日新闻`},{label: `今日番剧`, value: `今日番剧`}]
+  let push = [{label: `定时发图`, value: `定时发图`},{label: `摸鱼日历`, value: `摸鱼日历`},{label: `今日新闻`, value: `今日新闻`},{label: `今日番剧`, value: `今日番剧`},{label: `订阅小说`, value: `订阅小说`}]
 
   return {
     pluginInfo: {
@@ -167,7 +166,7 @@ export function supportGuoba() {
       bottomHelpMessage: '请前往https://github.com/chatanywhere/GPT_API_free获得',
       component: 'InputPassword',
       componentProps: {
-        placeholder: 'GPTkey',   
+        placeholder: 'GPTkey',
       },
   },
   {
@@ -217,6 +216,38 @@ export function supportGuoba() {
     },
   },
 
+  {
+    component: 'Divider',
+    label: 'API相关设置'
+  },
+  {
+    field: "API.API",
+    label: "设定",
+    bottomHelpMessage: '设定功能',
+    component: "GSubForm",
+    componentProps: {
+      multiple: true,
+      schemas: [
+        {
+          field: "FunctionName",
+          label: "功能",
+          component: 'Select',
+          componentProps: {
+          options: push,
+          },
+        },
+        {
+          field: 'SourceUrl',
+          label: 'API链接',
+          bottomHelpMessage: '资源路径,响应直接为image,支持重定向图链,不要点击新增会有奇奇怪怪的bug',
+          component: 'Input',
+        },
+
+      ],
+    },
+  },
+
+
 
 
   {
@@ -256,6 +287,7 @@ export function supportGuoba() {
           bottomHelpMessage: '推送群号',
           component: 'GSelectGroup',
         },
+
       ],
     },
   },
@@ -397,7 +429,7 @@ export function supportGuoba() {
       options: EmojiIndexex,
     },
   },
-  
+
 
   {
     component: 'Divider',

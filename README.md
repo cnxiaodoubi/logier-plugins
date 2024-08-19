@@ -1,17 +1,15 @@
 
 # 鸢尾花插件(logier-plugin) 分支版
+
 <div align="center">
   <a href="https://logier.gitee.io/">
     <img src="./resources/img/logo.png" alt="Logo" height="120">
   </a>
-<br>
 
- [![Group](https://img.shields.io/badge/QQ-blue?style=flat&labelColor=white&logo=tencentqq&logoColor=black)](https://qm.qq.com/cgi-bin/qm/qr?k=Tx0KJBxwamQ1slXC4d3ZVhSigQ9MiCmJ&jump_from=webapi&authKey=BJVVNjuciQCnetGahh3pNOirLULs1XA7fQMn/LlPWAWk5GDdr2WWB/zHim1k1OoY) &nbsp; [![Group](https://img.shields.io/badge/博客-blue?style=flat&labelColor=white&logo=hexo&logoColor=black)](https://www.atxrom.com/) &nbsp; &nbsp; <a href='https://gitee.com/logier/logier-plugins/stargazers'><img src='https://gitee.com/logier/logier-plugins/badge/star.svg?theme=dark' alt='star'></img></a> &nbsp; 
-
- <img src="https://count.getloli.com/get/@:logier?theme=moebooru-h" alt=":logier" />
+ 
 </div>
 
-<br>
+
 
 
  
@@ -21,6 +19,7 @@
 
 ## 更新日志 💡
 
+#### **24.08.16 添加自定义摸鱼日历和今日新闻api**
 #### **24.08.16 修复BUG VS 语法懂的不是很多 可能会出现屎山**
 #### **24.02.26 更新潜伏模板，群聊中收到消息后概率GPT回复并发送表情包，对俗手哥拙劣的模仿**
 #### **24.02.23 破坏性更新，修复了更新后配置项丢失的问题，以及启动插件缺失yaml文件的问题，更新后需要重新配置，谨慎更新**
@@ -33,7 +32,7 @@ Yunzai-Bot目录下执行
 gitee
 
 ```bash
-git clone --depth=1 https://gitee.com/cnxiaodoubi/logier-plugins ./plugins/logier-plugin/
+git clone -b Alpha0.3 https://gitee.com/cnxiaodoubi/logier-plugins ./plugins/logier-plugin/
 ```
 
 
@@ -57,7 +56,7 @@ git clone --depth=1 https://gitee.com/cnxiaodoubi/logier-plugins ./plugins/logie
 | 算一卦 | #算卦 #悔卦 | 塔罗牌 | #塔罗牌 #占卜 #彩虹塔罗牌 | 
 | 签到 | #签到 | 番剧 | #今日番剧 |
 | 自定义图片api | 自定义指令 | 进退群通知 | 进退群触发 | 
-| 问候回复 |  打招呼触发 <br> 例如早安、晚安 |潜伏模板   | 发送消息随机触发 |
+| 问候回复 |  打招呼触发 <br> 例如早安、晚安 | 潜伏模板  | 发送消息随机触发 |
 
 <br>
 
