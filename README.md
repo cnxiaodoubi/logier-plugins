@@ -32,7 +32,7 @@ Yunzai-Bot目录下执行
 gitee
 
 ```bash
-git clone -b Alpha0.3 https://gitee.com/cnxiaodoubi/logier-plugins ./plugins/logier-plugin/
+git clone --depth=1 https://gitee.com/cnxiaodoubi/logier-plugins ./plugins/logier-plugin/
 ```
 
 
