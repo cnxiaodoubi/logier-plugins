@@ -4,4 +4,4 @@ API:
   - FunctionName: 今日新闻
     SourceUrl: https://api.03c3.cn/api/zb
   - FunctionName: 真寻日报
-    SourceUrl: https://api.vvhan.com/api/moyu
+    SourceUrl: https://http://api.atxrom.cn/
