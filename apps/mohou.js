@@ -42,9 +42,9 @@ export class example extends plugin {
                 // 添加延迟以防止消息发送过快
                 setTimeout(async () => {
                     const group = Bot.pickGroup(this.newsConfig.PushGroupList[i])
-                    logger.info(`[真寻日报]正在向群组 ${group} 推送新闻。`)
+                    logger.info(`[真寻日报]正在向群组 ${group} 推送日报。`)
                     await group.sendMsg([segment.image(imageUrl)])
-                    logger.info(`[真寻日报]新闻已成功推送到群组 ${group}。`)
+                    logger.info(`[真寻日报]日报已成功推送到群组 ${group}。`)
                 }, i * 1000)
             }
 
