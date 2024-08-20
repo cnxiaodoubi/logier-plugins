@@ -242,6 +242,23 @@ export function supportGuoba() {
           bottomHelpMessage: '资源路径,响应直接为image,支持重定向图链,不要点击新增会有奇奇怪怪的bug',
           component: 'Input',
         },
+        {
+          field: 'isAutoPush',
+          label: '推送开关',
+          component: 'Switch'
+        },
+        {
+          field: 'PushTime',
+          label: '推送时间',
+          bottomHelpMessage: '推送时间，使用cron表达式',
+          component: 'Input',
+        },
+        {
+          field: 'PushGroupList',
+          label: '推送群号',
+          bottomHelpMessage: '推送群号',
+          component: 'GSelectGroup',
+        },
 
       ],
     },
