@@ -1,0 +1,26 @@
+Push:
+  - FunctionName: 定时发图
+    isAutoPush: false
+    PushTime: 0 0 */1 * * ?
+    PushGroupList: []
+  - FunctionName: 摸鱼日历
+    isAutoPush: false
+    PushTime: 0 30 9 * * ?
+    PushGroupList: []
+  - FunctionName: 今日新闻
+    isAutoPush: false
+    PushTime: 0 30 7 * * ?
+    PushGroupList: []
+  - FunctionName: 真寻日报
+    isAutoPush: false
+    PushTime: 0 30 7 * * ?
+    PushGroupList: [ ]
+  - FunctionName: 今日番剧
+    isAutoPush: false
+    PushTime: 0 30 18 * * ?
+    PushGroupList: []
+  - FunctionName: 订阅小说
+    isAutoPush: false
+    PushTime: 0 0/10 * * * ?
+    PushGroupList: []
+
