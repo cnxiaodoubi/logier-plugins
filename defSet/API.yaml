@@ -3,3 +3,5 @@
     SourceUrl: https://api.vvhan.com/api/moyu
   - FunctionName: 今日新闻
     SourceUrl: https://dayu.qqsuu.cn/weiyujianbao.php
+  - FunctionName: 真寻日报
+    SourceUrl: https://api.vvhan.com/api/moyu
