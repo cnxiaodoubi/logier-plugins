@@ -219,7 +219,7 @@ export function supportGuoba() {
 
   {
     component: 'Divider',
-    label: '新闻,日历,API,推送相关设置'
+    label: '新闻,日历  API,推送相关设置'
   },
   {
     field: "API.API",
