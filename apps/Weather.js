@@ -211,6 +211,7 @@ async function getForecast (location, WeatherKey) {
   return { forecastresult, iconDays, iconNights }
 }
 
+
 async function getIndices (location, WeatherKey) {
   const indices = `https://devapi.qweather.com/v7/indices/1d?type=1,3,5,9,11,14,15,16&location=${location}&key=${WeatherKey}`
   const indicesresponse = await fetch(indices)

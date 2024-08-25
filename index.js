@@ -2,6 +2,7 @@ import fs from 'node:fs'
 
 if (!global.segment) {
   global.segment = (await import("icqq")).segment
+  //global.segment = (await import("oicq")).segment
 }
 
 const files = fs
