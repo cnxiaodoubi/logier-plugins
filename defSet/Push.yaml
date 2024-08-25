@@ -1,13 +1,14 @@
 Push:
   - FunctionName: 定时发图
     isAutoPush: false
-    PushTime: 0 0 */1 * * ?
+    PushTime: 
     PushGroupList: []
   - FunctionName: 今日番剧
     isAutoPush: false
-    PushTime: 0 30 18 * * ?
+    PushTime: 
     PushGroupList: []
   - FunctionName: 订阅小说
     isAutoPush: false
-    PushTime: 0 0/10 * * * ?
+    PushTime: 
     PushGroupList: []
+

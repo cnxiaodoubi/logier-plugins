@@ -250,8 +250,10 @@ export function supportGuoba() {
         {
           field: 'PushTime',
           label: '推送时间',
-          bottomHelpMessage: '推送时间，使用cron表达式',
-          component: 'Input',
+          component: 'EasyCron',
+          componentProps: {
+            placeholder: '请输入或选择Cron表达式',
+          },
         },
         {
           field: 'PushGroupList',
@@ -295,8 +297,10 @@ export function supportGuoba() {
         {
           field: 'PushTime',
           label: '推送时间',
-          bottomHelpMessage: '推送时间，使用cron表达式',
-          component: 'Input',
+          component: 'EasyCron',
+          componentProps: {
+            placeholder: '请输入或选择Cron表达式',
+          },
         },
         {
           field: 'PushGroupList',
@@ -328,8 +332,10 @@ export function supportGuoba() {
   {
     field: 'Weather.WeatherPushTime',
     label: '推送时间',
-    bottomHelpMessage: '推送天气时间，使用cron表达式',
-    component: 'Input',
+    component: 'EasyCron',
+          componentProps: {
+            placeholder: '请输入或选择Cron表达式',
+          },
   },
   {
     field: "Weather.WeatherPushgroup",
