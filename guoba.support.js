@@ -21,7 +21,8 @@ export function supportGuoba() {
 
   let setimage = [{label: `定时发图`, value: `定时发图`},{label: `今日运势`, value: `今日运势`},{label: `算一卦`, value: `算一卦`},{label: `今日签到`, value: `今日签到`},{label: `城市天气`, value: `城市天气`},{label: `default`, value: `default`}]
 
-  let push = [{label: `定时发图`, value: `定时发图`},{label: `摸鱼日历`, value: `摸鱼日历`},{label: `今日新闻`, value: `今日新闻`},{label: `今日番剧`, value: `今日番剧`},{label: `订阅小说`, value: `订阅小说`}]
+  let push = [{label: `定时发图`, value: `定时发图`},{label: `今日番剧`, value: `今日番剧`},{label: `订阅小说`, value: `订阅小说`}]
+  let API = [{label: `摸鱼日历`, value: `摸鱼日历`},{label: `今日新闻`, value: `今日新闻`},{label: `真寻日报`, value: `真寻日报`}]
 
   return {
     pluginInfo: {
@@ -233,13 +234,13 @@ export function supportGuoba() {
           label: "功能",
           component: 'Select',
           componentProps: {
-          options: push,
+          options: API,
           },
         },
         {
           field: 'SourceUrl',
           label: 'API链接',
-          bottomHelpMessage: '资源路径,响应直接为image,支持重定向图链,不要点击新增会有奇奇怪怪的bug',
+          bottomHelpMessage: '资源路径,响应直接为image',
           component: 'Input',
         },
         {
