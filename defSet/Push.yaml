@@ -7,8 +7,3 @@ Push:
     isAutoPush: false
     PushTime: 
     PushGroupList: []
-  - FunctionName: 订阅小说
-    isAutoPush: false
-    PushTime: 
-    PushGroupList: []
-

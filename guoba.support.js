@@ -21,7 +21,7 @@ export function supportGuoba() {
 
   let setimage = [{label: `定时发图`, value: `定时发图`},{label: `今日运势`, value: `今日运势`},{label: `算一卦`, value: `算一卦`},{label: `今日签到`, value: `今日签到`},{label: `城市天气`, value: `城市天气`},{label: `default`, value: `default`}]
 
-  let push = [{label: `定时发图`, value: `定时发图`},{label: `今日番剧`, value: `今日番剧`},{label: `订阅小说`, value: `订阅小说`}]
+  let push = [{label: `定时发图`, value: `定时发图`},{label: `今日番剧`, value: `今日番剧`}]
   let API = [{label: `摸鱼日历`, value: `摸鱼日历`},{label: `今日新闻`, value: `今日新闻`},{label: `真寻日报`, value: `真寻日报`}]
 
   return {
@@ -219,7 +219,7 @@ export function supportGuoba() {
 
   {
     component: 'Divider',
-    label: 'API相关设置'
+    label: '新闻,日历,API,推送相关设置'
   },
   {
     field: "API.API",
@@ -272,7 +272,7 @@ export function supportGuoba() {
 
   {
     component: 'Divider',
-    label: '推送相关设置'
+    label: '发图,番剧推送相关设置'
   },
   {
     field: "Push.Push",
