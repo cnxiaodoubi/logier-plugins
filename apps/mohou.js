@@ -4,7 +4,7 @@ export class example extends plugin {
     constructor () {
         super({
             name: '[鸢尾花插件]真寻日报',
-            dsc: '获取每日60s新闻',
+            dsc: '真寻日报',
             event: 'message',
             priority: 5000,
             rule: [
