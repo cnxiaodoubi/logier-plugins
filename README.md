@@ -273,7 +273,7 @@ git clone --depth=1 https://gitee.com/cnxiaodoubi/logier-plugins ./plugins/logie
 
 
 ## 作者相关 🎲
-- [QQ群](https://qm.qq.com/cgi-bin/qm/qr?k=Tx0KJBxwamQ1slXC4d3ZVhSigQ9MiCmJ&jump_from=webapi&authKey=BJVVNjuciQCnetGahh3pNOirLULs1XA7fQMn/LlPWAWk5GDdr2WWB/zHim1k1OoY)
+- [QQ群](https://qm.qq.com/q/eiqAfsf6Io)
 - [个人博客网站](https://www.atxrom.com/)
 
 <details> <summary>参考仓库列表</summary>
