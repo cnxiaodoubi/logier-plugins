@@ -30,6 +30,7 @@ export class TextMsg extends plugin {
 
   // 执行方法1
   async 今日番剧 (e) {
+    try{
     const html = await test()
 
     let browser
@@ -40,12 +41,18 @@ export class TextMsg extends plugin {
       const image = Buffer.from(await page.screenshot({ fullPage: true }))
       e.reply(segment.image(image))
     } catch (error) {
-      logger.info('图片渲染失败')
+      logger.info('图片渲染失败');
+      e.reply('图片渲染失败，请稍后再试'); 
     } finally {
       if (browser) {
         await browser.close()
       }
-    }
+    }  
+    }  catch (error) {  
+      // 捕获从 getItems 或 test 中抛出的错误  
+      logger.error('无法获取番剧信息:', error.message);  
+      e.reply('无法访问API，请稍后再试'); }
+
     return true
   }
 
