@@ -25,22 +25,13 @@ export class TextMsg extends plugin {
     }
     Object.defineProperty(this.task, 'log', { get: () => false })
   }
-  
+
   get BangumiConfig () { return getFunctionData('Push', 'Push', '今日番剧') }
 
   // 执行方法1
-
- // async 今日番剧(e) {  
-  //  try {  
-      // 从Redis获取数据  
-  //   const bangumiData = await redis.get('bangumi_data');  
-  //    if (!bangumiData) {  
-  //      e.reply('无法获取番剧信息，请稍后再试');  
-  //      return;  
-  //    }   
-      async 今日番剧 (e) {
-        try{
-        const html = await test()
+  async 今日番剧 (e) {
+    try{
+    const html = await test()
 
     let browser
     try {
@@ -97,30 +88,29 @@ export class TextMsg extends plugin {
   }
 }
 
-async function getItems() {  
-  try {  
-    const response = await fetch('https://api.bgm.tv/calendar');  
-    const data = await response.json();  
-  
-    const now = new Date();  
-    const weekday = (now.getDay() + 6) % 7 + 1;  
-    const items = data.find(item => item.weekday.id === weekday).items;  
-  
-    // 提取并处理数据  
-    const itemDetails = items.map(item => ({  
-      name: item.name_cn || '',  
-      score: item.rating ? item.rating.score : '',  
-      image: item.images ? item.images.common : ''  
-    })).filter(item => item.name && item.score && item.image);  
-  
-    // 存储到Redis（这里简单存储为JSON字符串）  
-    await redis.set('bangumi_data', JSON.stringify(itemDetails));  
-    logger.info('数据被提取并存储在Redis中');  
-  } catch (error) {  
-    logger.error('无法获取或存储数据:', error.message);  
-  }  
-}  
+async function getItems () {
+  let response = await fetch('https://api.bgm.tv/calendar')
+  let data = await response.json()
 
+  let now = new Date()
+  let weekday = (now.getDay() + 6) % 7 + 1 // 将星期日转换为7，星期一到星期六转换为1到6
+
+  // 找到对应星期的项目
+  let items = data.find(item => item.weekday.id === weekday).items
+
+  // 提取 name_cn、rating 和 images 属性并组成新的数组
+  let itemDetails = items.map(item => {
+    return {
+      name: item.name_cn || '',
+      score: item.rating ? item.rating.score : '',
+      image: item.images ? item.images.common : ''
+    }
+  }).filter(item => item.name && item.score && item.image) // 过滤掉任何属性为空的项
+
+  logger.info(itemDetails)
+
+  return itemDetails
+}
 
 async function test () {
   let itemDetails = await getItems()
