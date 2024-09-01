@@ -30,28 +30,29 @@ export class TextMsg extends plugin {
 
   // 执行方法1
   async 今日番剧 (e) {
-    try{
-    const html = await test()
-
-    let browser
     try {
-      browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox', '--disable-setuid-sandbox'] })
-      const page = await browser.newPage()
-      await page.setContent(html)
-      const image = Buffer.from(await page.screenshot({ fullPage: true }))
-      e.reply(segment.image(image))
-    } catch (error) {
-      logger.info('图片渲染失败');
-      e.reply('图片渲染失败，请稍后再试'); 
-    } finally {
-      if (browser) {
-        await browser.close()
+      const html = await test()
+
+      let browser
+      try {
+        browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox', '--disable-setuid-sandbox'] })
+        const page = await browser.newPage()
+        await page.setContent(html)
+        const image = Buffer.from(await page.screenshot({ fullPage: true }))
+        e.reply(segment.image(image))
+      } catch (error) {
+        logger.info('图片渲染失败')
+        e.reply('图片渲染失败，请稍后再试')
+      } finally {
+        if (browser) {
+          await browser.close()
+        }
       }
-    }  
-    }  catch (error) {  
-      // 捕获从 getItems 或 test 中抛出的错误  
-      logger.error('无法获取番剧信息:', error.message);  
-      e.reply('无法访问API，请稍后再试'); }
+    } catch (error) {
+      // 捕获从 getItems 或 test 中抛出的错误
+      logger.error('无法获取番剧信息:', error.message)
+      e.reply('无法访问API，请稍后再试')
+    }
 
     return true
   }
@@ -89,10 +90,13 @@ export class TextMsg extends plugin {
 }
 
 async function getItems () {
+
   let response = await fetch('https://api.bgm.tv/calendar')
+
   let data = await response.json()
 
   let now = new Date()
+
   let weekday = (now.getDay() + 6) % 7 + 1 // 将星期日转换为7，星期一到星期六转换为1到6
 
   // 找到对应星期的项目
@@ -108,13 +112,19 @@ async function getItems () {
   }).filter(item => item.name && item.score && item.image) // 过滤掉任何属性为空的项
 
   logger.info(itemDetails)
+  // 将 itemDetails 存入 Redis
+ await redis.set(`itemDetails`, JSON.stringify(itemDetails))
 
   return itemDetails
 }
 
-async function test () {
-  let itemDetails = await getItems()
-  let itemDetailsJson = JSON.stringify(itemDetails)
+async function test() {
+  // 从 Redis 获取数据，如果 Redis 中没有数据，则先获取并存入
+  let itemDetailsJson = await redis.get('itemDetails');
+  if (!itemDetailsJson) {
+    itemDetailsJson = JSON.stringify(await getItems());
+  }
+  //let itemDetailsJson = JSON.stringify(itemDetails)
 
   let html = `
     <!DOCTYPE html>
@@ -176,9 +186,6 @@ async function test () {
             </script>
         </div>
     </body>
-    </html>
-    
-    `
-
+    </html>`
   return html
 }
