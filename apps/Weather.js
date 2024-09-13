@@ -45,7 +45,7 @@ export class example extends plugin {
     logger.info(this.Config.WeatherPushSwitch)
     logger.info(this.Config.WeatherPushgroup)
 
-    const image = (await pushweather(e)) // 添加了 await
+    const image = Buffer.from(await pushweather(e)) // 添加了 await
     e.reply([segment.image(image)])
 
     return true
@@ -82,7 +82,7 @@ async function pushweather (e, pushcity) {
          <!DOCTYPE html>
          <html>
          <head>
-         <link rel="stylesheet" href="https://jsd.cdn.zzko.cn/npm/qweather-icons@1.3.0/font/qweather-icons.css"> 
+         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/qweather-icons@1.3.2/font/qweather-icons.css"> 
          <style>
          * {
             padding: 0;
@@ -168,6 +168,20 @@ async function pushweather (e, pushcity) {
   }
 }
 
+async function getCityGeo (city, WeatherKey) {
+  const cityGeo = `https://geoapi.qweather.com/v2/city/lookup?location=${city}&key=${WeatherKey}`
+  const cityGeoresponse = await fetch(cityGeo)
+  const data = await cityGeoresponse.json()
+  if (data.code !== '200') {
+    logger.info('未获取到城市id')
+    return false
+  }
+  const location = data.location[0].id
+  const name = data.location[0].name
+
+  return { location, name }
+}
+
 async function getForecast (location, WeatherKey) {
   const forecast = `https://devapi.qweather.com/v7/weather/3d?location=${location}&key=${WeatherKey}`
   const forecastresponse = await fetch(forecast)
@@ -238,16 +252,4 @@ async function getIndices (location, WeatherKey) {
   return output
 }
 
-async function getCityGeo (city, WeatherKey) {
-  const cityGeo = `https://geoapi.qweather.com/v2/city/lookup?location=${city}&key=${WeatherKey}&city=`
-  const cityGeoresponse = await fetch(cityGeo)
-  const data = await cityGeoresponse.json()
-  if (data.code !== '200') {
-    logger.info('未获取到城市id')
-    return false
-  }
-  const location = data.location[0].id
-  const name = data.location[0].name
 
-  return { location, name }
-}
