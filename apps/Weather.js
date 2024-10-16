@@ -82,8 +82,54 @@ async function pushweather (e, pushcity) {
          <!DOCTYPE html>
          <html>
          <head>
-         <link rel="stylesheet" href='../resources/font/qweather-icons.css'> 
-
+         <link rel="stylesheet" href='../resources/font/icons.css'> 
+         <style>
+         * {
+            padding: 0;
+            margin: 0;
+         }
+         body{
+           position:absolute;
+         }
+         .nei{
+           float: left;
+           box-shadow: 3px 3px 3px #666666;
+           width: 50%;
+           min-width: 400px;
+           height:100%;
+           display:flex;
+           flex-direction: column;
+           justify-content: space-between;
+           border-radius:10px 10px 10px 10px;
+           border:1px solid #a1a1a1;
+           background: rgba(255, 255, 255, 0.5);
+           z-index:1;
+           position:absolute;
+         }
+         p {
+           color : rgba(0,0,0, 0.6);
+           font-size:1.5rem;
+           padding: 2px; 
+           word-wrap: break-word;
+           white-space: pre-wrap;
+         }
+         .centered-content {
+           display: flex;
+           flex-direction: column;
+           justify-content: flex-start;
+           margin: 0 1rem 0 1rem;
+           height: 100%;
+         }
+         .tu{
+          float: left;
+           border:1px solid #00000;
+           max-width: 1024px
+         }
+         img{
+            border:1px solid #00000;
+            border-radius:10px 10px 10px 10px;
+         }
+         </style>
          </head>
          <body>
          <div class="tu">
