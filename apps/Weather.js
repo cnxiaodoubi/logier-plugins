@@ -82,7 +82,7 @@ async function pushweather (e, pushcity) {
          <!DOCTYPE html>
          <html>
          <head>
-         <link rel="stylesheet" href="https://unpkg.shop.jd.com/qweather-icons@1.1.0/font/qweather-icons.css"> 
+         <link rel="stylesheet" href="https://unpkg.com/qweather-icons@1.6.0/font/qweather-icons.css"> 
          <style>
          * {
             padding: 0;
