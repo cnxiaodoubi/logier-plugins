@@ -82,7 +82,7 @@ async function pushweather (e, pushcity) {
          <!DOCTYPE html>
          <html>
          <head>
-         <link rel="stylesheet" href="https://cdn.atxrom.com/Icons/font/qweather-icons.css"> 
+         <link rel="stylesheet" href="../resources/font/icons.css"> 
          <style>
          * {
             padding: 0;
