@@ -10,7 +10,8 @@
 
  <img src="https://count.getloli.com/get/@:logier?theme=moebooru-h" alt=":logier" />
 </div>
-<br>
+
+
 
 ***如果发现bug，希望及时Q群告知我或提交issue***
 ***如果喜欢本插件，就点点star吧***
