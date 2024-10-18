@@ -57,8 +57,7 @@ git clone --depth=1 https://github.com/logier/logier-plugins.git ./plugins/logie
 | 签到 | #签到 | 番剧 | #今日番剧 |
 | 自定义图片api | 自定义指令 | 进退群通知 | 进退群触发 | 
 | 问候回复 |  打招呼触发 <br> 例如早安、晚安 | 发送消息随机触发| 潜伏模板|
-|  |   |  |  |
-<br>
+
 
 ### 表情包系列
 
