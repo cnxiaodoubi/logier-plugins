@@ -60,3 +60,90 @@ git clone --depth=1 https://github.com/logier/logier-plugins.git ./plugins/logie
 
 
 ### 表情包系列
+
+
+<details> <summary>表情包仓库</summary>
+
+- 可联动**保存表情包**，将保存地址填入自定义表情包地址。
+- [表情包仓库源地址](https://gitee.com/logier/emojihub)
+- 最新版更新锅巴配置屏蔽部分表情包，如龙图、小黑子，支持分群配置。
+- 可配置表情包仓库随机时自定义表情包概率，默认为0
+
+| 指令 | 表情包 | 指令 | 表情包 |
+| :----:| :----: | :----:| :----: |
+| 表情包仓库 | 全随机 | 自定义表情包 | 自定义表情包 |
+| 阿夸 | <img src="./resources/img/阿夸70.webp" width="50px"> | 阿尼亚 | <img src="./resources/img/阿尼亚52.webp" width="50px"> |
+| 白圣女 | <img src="./resources/img/白圣女19.webp" width="50px"> | 柴郡 | <img src="./resources/img/柴郡82.webp" width="50px"> |
+| 甘城猫猫 | <img src="./resources/img/nacho10.webp" width="50px"> | 狗妈 | <img src="./resources/img/54.webp" width="50px"> |
+| chiikawa | <img src="./resources/img/chiikawa65.webp" width="50px"> | 龙图 | <img src="./resources/img/long4.gif" width="50px"> |
+| capoo | <img src="./resources/img/capoo7.webp" width="50px"> | 小黑子 | <img src="./resources/img/什么？有人黑我？.webp" width="50px"> |
+| 亚托莉 | <img src="./resources/img/亚托莉8.webp" width="50px"> | 真寻 | <img src="./resources/img/真寻酱17.webp" width="50px"> |
+| 七濑胡桃 | <img src="./resources/img/menhera8.webp" width="50px"> | 小狐狸 | <img src="./resources/img/2509595_68132875_p0.webp" width="50px"> |
+| 喵内 | <img src="./resources/img/v2-1149a5b7f21e7dcced326221b5d76187_720w.webp" width="50px"> | 波奇 | <img src="./resources/img/v2-1cecb2cfb0a7b224db54a1500564068d.webp" width="50px"> |
+| 心海 | <img src="./resources/img/axsgQ2s-pnkZ1rT1kS74-2v.gif" width="50px"> |  |  |
+</details>
+
+<br>
+
+<details> <summary>表情包小偷</summary>
+
+- 配置群号，当群里有人发表情包时，会记录到数据库。
+- 配置概率，当配置群里有人发消息时，会概率把之前记录的表情包发送。
+</details>
+
+<br>
+
+<details> <summary>戳一戳表情包</summary>
+
+- 戳一戳发送表情包，配置和**表情包仓库**共用。
+- 配置概率，默认为0，全部用表情包回复，提高会概率用GPT回复。
+- GPT需要配置key，[如何获取key？](#如何获取key)
+
+<img src="./resources/img/chuoyichuo.jpg" width="60%">
+</details>
+
+<br>
+
+<details> <summary>保存表情包</summary>
+
+- **保存+图片**或**引用图片+保存**即可保存。
+- 默认保存路径云崽根目录+/resources/logier/emoji
+- 支持保存多张。
+- **查看表情包**会返回图片编号
+- **查看表情包+编号**会发送此编号的图片
+- **删除表情包+编号**会删除此编号的图片
+- 支持双路径保存
+</details>
+
+<br>
+
+### 定时系列
+
+<details> <summary>定时发图、摸鱼日历、今日新闻</summary>
+
+- [定时发图如何获取图片api？](#如何获取图片api)
+- 配置发送时间，采用cron表达式。👉[Cron表达式在线生成器](https://cron.qqe2.com/)
+</details>
+
+<br>
+
+<details> <summary>城市天气</summary>
+
+- 配置发送时间，采用cron表达式。👉[Cron表达式在线生成器](https://cron.qqe2.com/)
+- 使用和风天气API获得天气信息。[如何获取key？](#如何获取key)
+
+<img src="./resources/img/weather.jpg" width="40%">
+</details>
+
+<br>
+
+<details> <summary>今日番剧</summary>
+
+<img src="./resources/img/今日新番.png" width="40%">
+</details>
+
+<br>
+
+
+
+
