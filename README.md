@@ -147,3 +147,189 @@ git clone --depth=1 https://github.com/logier/logier-plugins.git ./plugins/logie
 
 
 
+
+
+
+
+### 运势系列
+
+<details> <summary>今日运势、算一卦</summary>
+
+- [如何获取图片api](#如何获取图片api)
+
+<img src="./resources/img/jrys.jpg" width="40%">
+
+
+<img src="./resources/img/算一卦.jpg" width="40%">
+</details>
+
+<br>
+
+
+<details> <summary>塔罗牌</summary>
+
+- 由AI解析占卜，需要gptkey [如何获取key？](#如何获取key)
+- 发送塔罗牌+想占卜的东西即可
+
+<img src="./resources/img/塔罗牌.webp" width="40%">
+
+- 支持抽三张占卜，发送 占卜+想占卜的东西 即可。
+- 注意！三牌占卜会用合并转发形式发送，部分适配器可能不支持。
+
+<img src="./resources/img/占卜.png" width="40%">
+</details>
+
+<br>
+
+
+<details> <summary>签到</summary>
+
+- 请使用横图图源 [如何获取图片api？](#如何获取图片api)
+- 竖图适配也许做，也许不做。
+
+<img src="./resources/img/签到.jpg" width="60%">
+</details>
+
+<br>
+
+<details> <summary>今日老婆</summary>
+
+- 重复发送marry会看到今天娶了谁。
+- 使用图片形式发送，带有一句结婚祝词。
+- 可以离婚（
+- 离婚一天只能一次。
+
+<img src="./resources/img/marry.webp" width="60%">
+</details>
+
+<br>
+
+<details> <summary>今日cp</summary>
+
+- 随机抽一个倒霉蛋群友组成cp
+- 这个功能测试的时候快被群友昵称的特殊字符整疯了
+
+<img src="./resources/img/今日cp.png" width="40%">
+</details>
+
+<br>
+
+### 小修系列
+
+<details> <summary>进退群通知</summary>
+
+- 修改自官方插件。
+- 进群时会发送其头像和一句 俏皮话欢迎。
+- 退群时有必要说俏皮话吗？
+
+<img src="./resources/img/进退群.png" width="60%">
+</details>
+
+<br>
+
+<details> <summary>问候回复</summary>
+
+- 发送早安、中午好、晚上好等词回复。
+- GPT回复，需要key，[如何获取key？](#如何获取key)
+
+<img src="./resources/img/问候回复.png" width="60%">
+</details>
+
+<br>
+
+
+
+<details> <summary>潜伏模板</summary>
+
+<img src="./resources/img/潜伏模板.png" width="60%">
+</details>
+
+<br>
+
+
+## 配置事项 📢
+
+### 如何填入本地图库？
+使用图片时，均可以使用本地或者网络图片
+本地图片支持图片文件上级目录，也就是如果文件结构如下，可以填写emojihub或capoo-emoji
+```
+├── emojihub
+│   ├── capoo-emoji
+│   │   ├── capoo100.gif
+│   ├── greyscale-emoji
+│   │   ├── greyscale100.gif
+支持jpg、jpeg、png、webp、gif
+```
+寻图逻辑获取文件夹和子文件夹下的所有图片然后随机一张
+
+<br>
+
+### 如何获取key？
+
+- 塔罗牌、问候回复和戳一戳回复需要GPT，可以前往[chatanywhere](https://github.com/chatanywhere/GPT_API_free?tab=readme-ov-file#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8)免费获得。
+
+<details> <summary>还是不懂？</summary>
+
+1.点击领取内测免费API Key
+
+<img src="./resources/img/chatanywhere.png">
+
+<br>
+
+2.复制这一串东西填入
+
+<img src="./resources/img/apikey.png" >
+</details>
+
+<br>
+
+
+- 城市天气可以前往[和风天气](https://console.qweather.com/#/apps)免费获得，👉[和风天气官方教程](https://dev.qweather.com/docs/configuration/project-and-key/)
+
+<br>
+
+
+
+### 如何获取图片api
+
+[我的个人博客](https://logier.gitee.io/gallery/)有很多我收集的图片api
+<details> <summary>图片api预览</summary>
+<img src="./resources/img/gallery.webp" >
+</details>
+
+<br>
+
+
+
+
+## 作者相关 🎲
+- [QQ群](https://qm.qq.com/cgi-bin/qm/qr?k=Tx0KJBxwamQ1slXC4d3ZVhSigQ9MiCmJ&jump_from=webapi&authKey=BJVVNjuciQCnetGahh3pNOirLULs1XA7fQMn/LlPWAWk5GDdr2WWB/zHim1k1OoY)
+- [个人博客网站](https://logier.gitee.io/)
+
+## 鸣谢列表 🎁
+
+[爱发电](https://afdian.net/a/logier)
+
+<img src="./resources/img/afdian-logier.jfif" width="60%">
+
+
+<details> <summary>参考仓库列表</summary>
+
+- [今日运势源仓库](https://github.com/twiyin0/koishi-plugin-jryspro)
+- [云崽插件基础示例](https://gitee.com/Zyy955/Miao-Yunzai-plugin)
+- [云崽市场](https://gitee.com/yhArcadia/Yunzai-Bot-plugins-indexn)
+- [向日葵插件](https://gitee.com/xrk114514/xrk-plugin)
+</details>
+
+<details> <summary>赞助人列表</summary>
+
+| 昵称 | 金额 |
+| :----:| :----: |
+| 悠修 | 10元 |
+| 慕蝶 | 5元 |
+| Hirasawa Yui | 5元 |
+| EF-2000台风 | 50元 |
+
+</details>
+
+
