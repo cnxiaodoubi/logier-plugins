@@ -2,6 +2,9 @@ import setting from '../model/setting.js'
 import fs from 'fs'
 import path from 'path'
 import https from 'https'
+import common from '../../../lib/common/common.js'
+
+const _path = process.cwd()
 
 // TextMsg可自行更改，其他照旧即可。
 export class TextMsg extends plugin {
@@ -50,9 +53,18 @@ export class TextMsg extends plugin {
       return false
     }
 
-    let fileNumbers = await saveFiles(e, this.appconfig.EmojiPath)
-
-    e.reply(`保存成功,编号为${generateRanges(fileNumbers)}`, true)
+    let fileNames = await saveFiles(e, this.appconfig.EmojiPath)
+    let message = []
+    for (let i of fileNames) {
+        let namePath = path.join(this.appconfig.EmojiPath, i)
+        message.push([`${i}`, segment.image(`file://${namePath}`)])
+    }
+    
+    if(fileNames.length>1){
+        e.reply(await common.makeForwardMsg(this.e, message, '保存表情包列表'));
+    }else{
+        e.reply(message[0])
+    }
 
     return true
   }
@@ -100,9 +112,9 @@ export class TextMsg extends plugin {
       return false
     }
 
-    let fileNumbers = await saveFiles(e, this.appconfig.SetuPath)
+    let fileNames = await saveFiles(e, this.appconfig.SetuPath)
 
-    e.reply(`保存成功,编号为${generateRanges(fileNumbers)}`, true)
+    e.reply(`保存成功,文件列表：${generateRanges(fileNames)}`, true);
 
     return true
   }
@@ -195,13 +207,13 @@ function handleEmoticon (e, savePath, number, name) {
 }
 
 async function saveFiles (e, savepath) {
-  let fileNumbers = []
+  let fileNames  = []
   if (e.img) {
     for (let img of e.img) {
       try {
-        const fileNumber = await saveFile(img, savepath)
-        console.log(`File saved successfully with number ${fileNumber}`)
-        fileNumbers.push(fileNumber)
+        const fileName = await saveFile(img, savepath);
+        console.log(`File saved successfully with name ${fileName}`);
+        fileNames.push(fileName);
       } catch (err) {
         console.error(err)
         e.reply('保存失败，请再次尝试或手动保存', true)
@@ -215,9 +227,9 @@ async function saveFiles (e, savepath) {
       for (let item of reply) {
         if (item.type === 'image') {
           try {
-            const fileNumber = await saveFile(item.url, savepath)
-            console.log(`File saved successfully with number ${fileNumber}`)
-            fileNumbers.push(fileNumber)
+            const fileName = await saveFile(img, savepath);
+            console.log(`File saved successfully with name ${fileName}`);
+            fileNames.push(fileName);
           } catch (err) {
             console.error(err)
             e.reply('保存失败，请再次尝试或手动保存', true)
@@ -230,11 +242,11 @@ async function saveFiles (e, savepath) {
     const reply = (await e.getReply()).message
     if (reply) {
       for (let item of reply) {
-        if (item.type === 'image') {
+        if (item.type === 'image' || item.type === 'mface') {
           try {
-            const fileNumber = await saveFile(item.url, savepath)
-            console.log(`File saved successfully with number ${fileNumber}`)
-            fileNumbers.push(fileNumber)
+            const fileName = await saveFile(item.url, savepath);
+            console.log(`File saved successfully with name ${fileName}`);
+            fileNames.push(fileName);
           } catch (err) {
             console.error(err)
             e.reply('保存失败，请再次尝试或手动保存', true)
@@ -246,21 +258,22 @@ async function saveFiles (e, savepath) {
   } else {
     return false
   }
-  return fileNumbers
+  return fileNames
 }
 
 function generateRanges (fileNumbers) {
-  let ranges = []
-  fileNumbers.sort((a, b) => a - b)
-  for (let i = 0; i < fileNumbers.length; i++) {
-    let start = fileNumbers[i]
-    while (i + 1 < fileNumbers.length && fileNumbers[i + 1] === fileNumbers[i] + 1) {
-      i++
-    }
-    let end = fileNumbers[i]
-    ranges.push(start === end ? `${start}` : `${start}-${end}`)
-  }
-  return ranges.join(', ')
+  // let ranges = []
+  // fileNumbers.sort((a, b) => a - b)
+  // for (let i = 0; i < fileNumbers.length; i++) {
+  //   let start = fileNumbers[i]
+  //   while (i + 1 < fileNumbers.length && fileNumbers[i + 1] === fileNumbers[i] + 1) {
+  //     i++
+  //   }
+  //   let end = fileNumbers[i]
+  //   ranges.push(start === end ? `${start}` : `${start}-${end}`)
+  // }
+  //直接返回文件名列表
+  return fileNumbers.join(', ');
 }
 
 function findFirstUnusedNumber (files) {
@@ -295,7 +308,7 @@ async function saveFile (url, savePath) {
       // 监听 'finish' 事件
       fileStream.on('finish', () => {
         console.log(`File saved as ${fileName}`)
-        resolve(counter) // 返回文件编号
+        resolve(fileName) // 返回文件名
       })
       // 监听 'error' 事件
       fileStream.on('error', (err) => {
