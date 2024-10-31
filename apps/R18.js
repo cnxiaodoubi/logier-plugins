@@ -35,4 +35,4 @@ export class example extends plugin {
   return true
 }
 }
-  const imageUrl = Buffer.from('https://ap.atxrom.com/r18');// 三次元接口地址 自己用
+  const imageUrl = 'https://ap.atxrom.com/r18';// 三次元接口地址 自己用
