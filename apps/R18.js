@@ -22,9 +22,9 @@ export class example extends plugin {
 
       async 三次元 (e) {
         const imageUrl = Buffer.from(newsimageUrl)
-       imgUrl = imgUrl.replace("data:image/png;base64,", "base64://");
+       imgUrl = imageUrl.replace("data:image/png;base64,", "base64://");
 
-        e.reply([segment.image(imageUrl)]);
+        e.reply([segment.image(imgUrl)]);
     
         return true
       }
