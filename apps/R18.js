@@ -1,3 +1,4 @@
+
 export class example extends plugin {
   constructor() {
     super({
@@ -18,7 +19,7 @@ export class example extends plugin {
 
 
 
-      async 今日新闻 (e) {
+      async 三次元 (e) {
 
         e.reply([segment.image(newsimageUrl)]);
     
@@ -26,12 +27,5 @@ export class example extends plugin {
       }
     
     }
-
-
-
-
-
-
-
 
 const newsimageUrl = 'https://ap.atxrom.com/r18';// 三次元接口地址 自己用
