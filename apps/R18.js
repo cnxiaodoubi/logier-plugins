@@ -15,21 +15,24 @@ export class example extends plugin {
       ]
     });
       }
-
-
-
-
-
-      async 三次元 (e) {
-
-        e.reply([segment.image(newsimageUrl)]);
     
-        return true
-      }
-    
-    }
 
 
 
+      async 摸鱼日历 (e) {
 
-const newsimageUrl = Buffer.from('https://ap.atxrom.com/r18');// 三次元接口地址 自己用
+
+ // 判断是否为 Base64 图片
+ if (imageUrl.startsWith('data:image/') && imageUrl.includes(';base64,')) {
+    // 如果是 Base64 图片 也发不出去
+
+    e.reply([segment.image(imageUrl)]) // 直接发送 Base64 图片
+  } else {
+    // 如果不是 Base64 图片
+    e.reply([segment.image(imageUrl)]) // 直接发送普通图片
+  }
+      
+  return true
+}
+}
+  const imageUrl = Buffer.from('https://ap.atxrom.com/r18');// 三次元接口地址 自己用
