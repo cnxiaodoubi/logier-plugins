@@ -3,14 +3,14 @@ import { getFunctionData } from '../utils/getdate.js'
 export class example extends plugin {
   constructor() {
     super({
-      name: '[鸢尾花插件]今日新闻',
-      dsc: '获取每日60s新闻',
+      name: '[鸢尾花插件]三次元',
+      dsc: '获三次元',
       event: 'message',
       priority: 5000,
       rule: [
         {
-          reg: '^#?(60s日报|今日新闻)$',
-          fnc: '今日新闻'
+          reg: '^#?(三次元)$',
+          fnc: '三次元'
         }
       ]
     });
