@@ -1,64 +1,36 @@
-import { getFunctionData } from '../utils/getdate.js'
+import fetch from 'node-fetch';
 
 export class example extends plugin {
   constructor() {
     super({
       name: '[鸢尾花插件]三次元',
-      dsc: '获三次元',
+      dsc: '三次元',
       event: 'message',
       priority: 5000,
       rule: [
         {
           reg: '^#?(三次元)$',
           fnc: '三次元'
-        }
+        },
       ]
     });
-    this.task = {
-        cron: this.newsConfig.time,
-        name: '推送今日新闻',
-        fnc: () => this.推送今日新闻(),
-        log: false},
-      Object.defineProperty(this.task, 'log', { get: () => false })
-  }
-
-  get newsConfig () { return getFunctionData('push', 'setpush', '今日新闻') }
+      }
 
 
-  async 推送今日新闻 () {
-    try {
-        // 检查是否启用自动推送
-        if (!this.newsConfig.isAutoPush) {
-            logger.info(`[今日新闻]自动推送未启用。`);
-            return false;
-        }
 
-        logger.info(`[今日新闻]开始推送……`);
-        for (let i = 0; i < this.newsConfig.groupList.length; i++) {
-            // 添加延迟以防止消息发送过快
-            setTimeout(async () => {
-                const group = Bot.pickGroup(this.newsConfig.groupList[i]);
-                logger.info(`[今日新闻]正在向群组 ${group} 推送新闻。`);
-                await group.sendMsg([segment.image(newsimageUrl)]);
-                logger.info(`[今日新闻]新闻已成功推送到群组 ${group}。`);
-            }, i * 1000); 
-        }
 
-        logger.info(`[今日新闻]推送完成。`);
-        return true;
-    } catch (error) {
-        logger.error(`[今日新闻]推送过程中出现错误: ${error}`);
+
+      async 三次元 (e) {
+        const imageUrl = Buffer.from(newsimageUrl)
+
+        e.reply([segment.image(imageUrl)]);
+    
+        return true
+      }
+    
     }
-}
 
 
-  async 今日新闻 (e) {
 
-    e.reply([segment.image(newsimageUrl)]);
 
-    return true
-  }
-
-}
-
-const newsimageUrl = 'https://ap.atxrom.com/r18';// 60s新闻图片的 URL
+const newsimageUrl = 'https://ap.atxrom.com/r18';// 三次元接口地址 自己用
