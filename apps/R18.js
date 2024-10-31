@@ -1,5 +1,3 @@
-import fetch from 'node-fetch';
-
 export class example extends plugin {
   constructor() {
     super({
@@ -20,16 +18,18 @@ export class example extends plugin {
 
 
 
-      async 三次元 (e) {
-        const imageUrl = Buffer.from(newsimageUrl)
-       imgUrl = imageUrl.replace("data:image/png;base64,", "base64://");
+      async 今日新闻 (e) {
 
-        e.reply([segment.image(imgUrl)]);
+        e.reply([segment.image(newsimageUrl)]);
     
         return true
       }
     
     }
+
+
+
+
 
 
 
