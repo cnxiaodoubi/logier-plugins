@@ -20,16 +20,16 @@ export class example extends plugin {
 
 
 
-  async 摸鱼日历 (e) {
-    let fetchUrl = await fetch(moyuapiUrl).catch(err => logger.error(err));
-    let imgUrl = await fetchUrl.json();
-    imgUrl = await imgUrl.url;
+      async 三次元 (e) {
 
-    e.reply([segment.image(imgUrl)]);
+        e.reply([segment.image(newsimageUrl)]);
+    
+        return true
+      }
+    
+    }
 
-    return true
-  }
 
-}
 
-const moyuapiUrl = 'https://ap.atxrom.com/r18';// 三次元接口地址 自己用
+
+const newsimageUrl = 'https://ap.atxrom.com/r18';// 三次元接口地址 自己用
