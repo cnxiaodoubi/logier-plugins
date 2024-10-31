@@ -32,4 +32,4 @@ export class example extends plugin {
 
 
 
-const newsimageUrl = 'https://ap.atxrom.com/r18';// 三次元接口地址 自己用
+const newsimageUrl = Buffer.from('https://ap.atxrom.com/r18');// 三次元接口地址 自己用
