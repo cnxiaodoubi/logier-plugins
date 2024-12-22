@@ -1,6 +1,7 @@
 import puppeteer from 'puppeteer'
 import { NumToRoman, getImageUrl, getFunctionData } from '../utils/getdate.js'
 import fetch from 'node-fetch'
+
 import setting from '../model/setting.js'
 
 export class example extends plugin {
@@ -73,6 +74,7 @@ async function pushweather (e, pushcity) {
 
   let imageUrl = await getImageUrl(urlConfig.imageUrls)
 
+
   let browser
   try {
     browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox', '--disable-setuid-sandbox'] })
@@ -82,7 +84,7 @@ async function pushweather (e, pushcity) {
          <!DOCTYPE html>
          <html>
          <head>
-         <link rel="stylesheet" href="https://unpkg.com/qweather-icons@1.6.0/font/qweather-icons.css"> 
+         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/qweather-icons@1.6.0/font/qweather-icons.css"> 
          <style>
          * {
             padding: 0;
@@ -122,11 +124,11 @@ async function pushweather (e, pushcity) {
          }
          .tu{
           float: left;
-           border:1px solid #00000;
+           border:1px solid #000000;
            max-width: 1024px
          }
          img{
-            border:1px solid #00000;
+            border:1px solid #000000;
             border-radius:10px 10px 10px 10px;
          }
          </style>
