@@ -1,0 +1,16 @@
+{
+  "name": "logier-plugin",
+  "version": "1.2.1",
+  "description": "Yunzai-Bot插件。兼容Miao-Yunzai（V3、V4）、TRSS-Yunzai",
+  "type": "module",
+  "module": "index.js",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "qweather-icons": "^1.6.0"
+  },
+  "devDependencies": {}
+}
