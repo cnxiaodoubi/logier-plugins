@@ -51,17 +51,17 @@ export async function gpt(messages, GPTKey = null, GPTUrl = null, GPTModel = nul
 
     logger.info(GPTUrl)
 
-    var myHeaders = new Headers();
+    let myHeaders = new Headers();
     myHeaders.append("Authorization", "Bearer " + GPTKey );
     myHeaders.append("User-Agent", "Apifox/1.0.0 (https://apifox.com)");
     myHeaders.append("Content-Type", "application/json");
 
-    var raw = JSON.stringify({
+    let raw = JSON.stringify({
         "model": GPTModel,
         "messages": messages
     });
 
-    var requestOptions = {
+    let requestOptions = {
         method: 'POST',
         headers: myHeaders,
         body: raw,

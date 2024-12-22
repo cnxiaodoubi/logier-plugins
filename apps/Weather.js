@@ -1,6 +1,7 @@
 import puppeteer from 'puppeteer'
 import { NumToRoman, getImageUrl, getFunctionData } from '../utils/getdate.js'
 import fetch from 'node-fetch'
+
 import setting from '../model/setting.js'
 
 export class example extends plugin {
@@ -73,6 +74,7 @@ async function pushweather (e, pushcity) {
 
   let imageUrl = await getImageUrl(urlConfig.imageUrls)
 
+
   let browser
   try {
     browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox', '--disable-setuid-sandbox'] })
@@ -82,7 +84,7 @@ async function pushweather (e, pushcity) {
          <!DOCTYPE html>
          <html>
          <head>
-         <link rel="stylesheet" href="https://jsd.cdn.zzko.cn/npm/qweather-icons@1.3.0/font/qweather-icons.css"> 
+         <link rel="stylesheet" href="../node_modules/qweather-icons/font/qweather-icons.css"> 
          <style>
          * {
             padding: 0;
@@ -122,11 +124,11 @@ async function pushweather (e, pushcity) {
          }
          .tu{
           float: left;
-           border:1px solid #00000;
+           border:1px solid #000000;
            max-width: 1024px
          }
          img{
-            border:1px solid #00000;
+            border:1px solid #000000;
             border-radius:10px 10px 10px 10px;
          }
          </style>
@@ -166,6 +168,20 @@ async function pushweather (e, pushcity) {
       await browser.close()
     }
   }
+}
+
+async function getCityGeo (city, WeatherKey) {
+  const cityGeo = `https://geoapi.qweather.com/v2/city/lookup?location=${city}&key=${WeatherKey}`
+  const cityGeoresponse = await fetch(cityGeo)
+  const data = await cityGeoresponse.json()
+  if (data.code !== '200') {
+    logger.info('未获取到城市id')
+    return false
+  }
+  const location = data.location[0].id
+  const name = data.location[0].name
+
+  return { location, name }
 }
 
 async function getForecast (location, WeatherKey) {
@@ -211,6 +227,7 @@ async function getForecast (location, WeatherKey) {
   return { forecastresult, iconDays, iconNights }
 }
 
+
 async function getIndices (location, WeatherKey) {
   const indices = `https://devapi.qweather.com/v7/indices/1d?type=1,3,5,9,11,14,15,16&location=${location}&key=${WeatherKey}`
   const indicesresponse = await fetch(indices)
@@ -237,16 +254,4 @@ async function getIndices (location, WeatherKey) {
   return output
 }
 
-async function getCityGeo (city, WeatherKey) {
-  const cityGeo = `https://geoapi.qweather.com/v2/city/lookup?location=${city}&key=${WeatherKey}&city=`
-  const cityGeoresponse = await fetch(cityGeo)
-  const data = await cityGeoresponse.json()
-  if (data.code !== '200') {
-    logger.info('未获取到城市id')
-    return false
-  }
-  const location = data.location[0].id
-  const name = data.location[0].name
 
-  return { location, name }
-}
