@@ -119,7 +119,7 @@ async function generateFortune (e) {
     <style>
     @font-face {
       font-family: AlibabaPuHuiTi-2-55-Regular;
-      src:url(https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlibabaPuHuiTi-2/AlibabaPuHuiTi-2-55-Regular/AlibabaPuHuiTi-2-55-Regular.woff2) format('woff2');
+      src:url(https://dd.atxrom.com/1825583963/font/HarmonyOS.woff2) format('woff2');
     }  
     html, body {
         margin: 0;
