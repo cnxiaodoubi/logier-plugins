@@ -116,32 +116,93 @@ async function generateFortune (e) {
   let Html = `
   <html style="background: rgba(255, 255, 255, 0.6)">
     <head>
-    <style>
-    @font-face {
-      font-family: AlibabaPuHuiTi-2-55-Regular;
-      src:url(https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlibabaPuHuiTi-2/AlibabaPuHuiTi-2-55-Regular/AlibabaPuHuiTi-2-55-Regular.woff2) format('woff2');
-    }  
-    html, body {
-        margin: 0;
-        padding: 0;
-        font-family: 'AlibabaPuHuiTi-2-55-Regular', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
-    }          
-    </style>
-    </head>
-    <div class="fortune" style="width: 30%; height: 65rem; float: left; text-align: center; background: rgba(255, 255, 255, 0.6);">
-      <p>${nickname}的${await numToChinese(new Date().getDate())}号运势为</p>
-      <h2>${fortune.fortuneSummary}</h2>
-      <p>${fortune.luckyStar}</p>
-      <div class="content" style="margin: 0 auto; padding: 12px 12px; height: 49rem; max-width: 980px; max-height: 1024px; background: rgba(255, 255, 255, 0.6); border-radius: 15px; backdrop-filter: blur(3px); box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3); writing-mode: vertical-lr; text-orientation: mixed;">
-        <p >${fortune.signText}</p>
-        <p >${fortune.unsignText}</p>
+     <style>
+        @font-face {
+          font-family: AlibabaPuHuiTi-2-55-Regular;
+          src:url(https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlibabaPuHuiTi-2/AlibabaPuHuiTi-2-55-Regular/AlibabaPuHuiTi-2-55-Regular.woff2) format('woff2');
+        }
+        html, body {
+          margin: 0;
+          padding: 0;
+          font-family: 'AlibabaPuHuiTi-2-55-Regular', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+        }
+
+        .container {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          width: 100%;
+          height: 100%;
+          padding: 20px;
+        }
+
+        .fortune {
+          width: 30%;
+          height: 65rem;
+          text-align: center;
+          background: rgba(255, 255, 255, 0.6);
+          padding: 20px;
+          box-sizing: border-box;
+          border-radius: 15px;
+          backdrop-filter: blur(3px);
+          box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .fortune h2 {
+          font-size: 2rem;
+          line-height: 2.5rem;
+        }
+
+        .content {
+          margin: 0 auto;
+          padding: 12px;
+          height: 49rem;
+          max-width: 980px;
+          max-height: 1024px;
+          background: rgba(255, 255, 255, 0.6);
+          border-radius: 15px;
+          backdrop-filter: blur(3px);
+          box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+          overflow-y: auto;
+          text-align: left;
+        }
+
+        .image {
+          height: 65rem;
+          width: 70%;
+          box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+          text-align: center;
+        }
+
+        .image img {
+          height: 100%;
+          object-fit: cover;
+          max-width: 100%;
+          filter: brightness(100%);
+        }
+      </style>
+    
+    
+    
+ 
+    <body>
+      <div class="container">
+        <div class="fortune">
+          <p>${nickname}的${await numToChinese(new Date().getDate())}号运势为</p>
+          <h2>${fortune.fortuneSummary}</h2>
+          <p>${fortune.luckyStar}</p>
+          <div class="content">
+            <p>${fortune.signText}</p>
+            <p>${fortune.unsignText}</p>
+          </div>
+          <p>| 相信科学，请勿迷信 |</p>
+          <p>Create By 鸢尾花插件 </p>
+        </div>
+        <div class="image">
+          <img src="${imageUrl}" />
+        </div>
       </div>
-      <p>| 相信科学，请勿迷信 |</p>
-      <p>Create By 鸢尾花插件 </p>
-    </div>
-    <div class="image" style="height:65rem; width: 70%; float: right; box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3); text-align: center;">
-      <img src=${imageUrl} style="height: 100%; filter: brightness(100%); overflow: hidden; display: inline-block; vertical-align: middle; margin: 0; padding: 0;"/>
-    </div>
+      </body>
   </html>
   `
 
@@ -150,6 +211,8 @@ async function generateFortune (e) {
     browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox', '--disable-setuid-sandbox'] })
     const page = await browser.newPage()
     await page.setContent(Html)
+    // 增加等待时间，确保图片加载完成
+    await page.waitForSelector('img')
     const image = Buffer.from(await page.screenshot({ fullPage: true }))
     e.reply(segment.image(image))
   } catch (error) {
