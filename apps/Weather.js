@@ -94,9 +94,9 @@ async function pushweather (e, pushcity) {
 
 @font-face {
   font-family: "qweather-icons";
-  src: url("../resources/font/fonts/qweather-icons.woff2?c4a8eb216e1e59e6c4df464b9ee6f9be") format("woff2"),
-       url("../resources/font/fonts/qweather-icons.woff?c4a8eb216e1e59e6c4df464b9ee6f9be") format("woff"),
-       url("../resources/font/fonts/qweather-icons.ttf?c4a8eb216e1e59e6c4df464b9ee6f9be") format("truetype");
+  src: url("https://dd.atxrom.com/1825583963/qweather-icons/fonts/qweather-icons.ttf?c4a8eb216e1e59e6c4df464b9ee6f9be") format("woff2"),
+       url("https://dd.atxrom.com/1825583963/qweather-icons/fonts/qweather-icons.ttf?c4a8eb216e1e59e6c4df464b9ee6f9be") format("woff"),
+       url("https://dd.atxrom.com/1825583963/qweather-icons/fonts/qweather-icons.ttf?c4a8eb216e1e59e6c4df464b9ee6f9be") format("truetype");
 }
 
 [class^="qi-"]::before,
@@ -1072,27 +1072,6 @@ async function pushweather (e, pushcity) {
 .qi-cold-fill::before { content: "\\f208"; }
 .qi-unknown-fill::before { content: "\\f209"; }
 
-         </style>
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         <style>
          * {
             padding: 0;
             margin: 0;
