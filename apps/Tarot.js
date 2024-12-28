@@ -118,17 +118,7 @@ async function 抽塔罗牌 (e, replacedMsg = '', isGPT = false) {
     let Html = `
   <html style="background: rgba(255, 255, 255, 0.6)">
   <head>
-    <style>
-    @font-face {
-      font-family: AlibabaPuHuiTi-2-55-Regular;
-      src:url(https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlibabaPuHuiTi-2/AlibabaPuHuiTi-2-55-Regular/AlibabaPuHuiTi-2-55-Regular.woff2) format('woff2');
-    }  
-    html, body {
-        margin: 0;
-        padding: 0;
-        font-family: 'AlibabaPuHuiTi-2-55-Regular', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
-    }         
-    </style>
+    <link rel="stylesheet" href="https://dd.atxrom.com/1825583963/logier/CSS/style.css"> 
   </head>
   <div class="fortune" style="width: 35%; height: 65rem; float: left; text-align: center; background: rgba(255, 255, 255, 0.6);">
     <h2>${randomCard.name_cn}</h2>

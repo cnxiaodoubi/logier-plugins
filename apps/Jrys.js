@@ -116,7 +116,7 @@ async function generateFortune (e) {
   let Html = `
   <html style="background: rgba(255, 255, 255, 0.6)">
     <head>
-      <link rel="stylesheet" href="https://dd.atxrom.com/1825583963/logier/CSS/jrys.css"> 
+      <link rel="stylesheet" href="https://dd.atxrom.com/1825583963/logier/CSS/style.css"> 
     </head>
     <div class="fortune" style="width: 30%; height: 65rem; float: left; text-align: center; background: rgba(255, 255, 255, 0.6);">
       <p>${nickname}的${await numToChinese(new Date().getDate())}号运势为</p>
