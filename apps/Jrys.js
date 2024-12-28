@@ -117,7 +117,6 @@ async function generateFortune (e) {
  <html>
   <head>
     <link rel="stylesheet" href="https://dd.atxrom.com/1825583963/logier/CSS/jsys.css">
-    <link rel="stylesheet" href="https://dd.atxrom.com/1825583963/logier/CSS/style.css"> 
   </head>
   <body>
     <div class="fortune">
