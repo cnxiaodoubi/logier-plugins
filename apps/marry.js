@@ -161,75 +161,52 @@ async function getRandomWife (e) {
 async function generateFortune (e, replyMessage, content, imageUrl) {
   let 结婚诗词 = [
     '百年推甲子，福地在春申',
-
     '红毹拥出态娇妍，璧合珠联看并肩',
-
     '锦堂此夜春如海，瑞兆其昌五世绵',
-
     '喜溢重门迎凤侣，光增陋室迓宾车',
-
     '花好月圆庆佳期，鸟语芬芳喜事添',
-
     '蓬门且喜来珠履，侣伴从今到白头',
-
     '志同道合好伴侣，情深谊长新家庭',
-
     '连理枝头喜鹊闹，才子佳人信天缘',
-
     '百年恩爱双心结，千里姻缘一线牵',
-
     '琴韵谱成同梦语，灯花笑对含羞人',
-
     '佳偶天成心相印，百年好合乐无边',
-
     '洞房花烛交颈鸳鸯双得意，夫妻恩爱和鸣凤鸾两多情',
-
     '锋芒略敛夫妻和美，凡事无争伉俪温馨',
-
     '相亲相爱幸福永，同德同心幸福长',
-
     '鸳鸯璧合天缘定，龙凤呈祥喜气生',
-
     '百年修得同船渡，千年修得共枕眠',
-
     '良缘相遇情不禁，一种缘分两处思',
-
     '情投意合如芝兰，同心协力共克艰',
-
     '桃花潭水深千尺，不及汪伦送我情',
-
-    '花开花落两相知，缘来缘去共相守'
-  ]
-
+    '花开花落两相知，缘来缘去共相守' ]
   if (!content) {
     let randomIndex = Math.floor(Math.random() * 结婚诗词.length)
     content = 结婚诗词[randomIndex]
   }
 
   let Html = `
-<html>
-<head>
-  <link rel="stylesheet" href="https://dd.atxrom.com/1825583963/logier/CSS/marry.css"> 
-</head>
-<body>
-    <div class="fortune">
-        <h2>今日老婆</h2>
+  <html>
+    <head>
+      <link rel="stylesheet" href="https://dd.atxrom.com/1825583963/logier/CSS/marry.css">
+   </head>
+  <body>
+   <div class="fortune">
+     <h2>今日老婆</h2>
         <br>
-        <div class="content">
-            <p>${content}</p>
-        </div>
-        <br>
-        <br>
-        <br>
+       <div class="content">
+          <p>${content}</p>
+       </div>
+          <br>
+          <br>
+          <br>
         <p>Create By Logier-Plugin </p>
+   </div>
+     <div class="image">
+      <img src="${imageUrl}" />
     </div>
-    <div class="image">
-        <img src="${imageUrl}" />
-    </div>
-</body>
-</html>
-    `
-
+  </body>
+ </html> `
   let browser
   try {
     browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox', '--disable-setuid-sandbox'] })
