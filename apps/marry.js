@@ -206,27 +206,27 @@ async function generateFortune (e, replyMessage, content, imageUrl) {
     content = 结婚诗词[randomIndex]
   }
 
-  let Html = `<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="https://dd.atxrom.com/1825583963/logier/CSS/marry.css"> <!-- 保留原有的外部样式表引用 -->
-</head>
-    <body>
-      <div class="fortune">
-         <h2>${randomCard.name_cn}</h2>
-         <p>${randomCard.name_en}</p>
-        <div class="content">
-          <p>${meaning}</p> <!-- 内联样式已移除 -->
-        </div>
-          <h2>${position}</h2>
-          <p>Create By 鸢尾花插件</p>
-      </div>
-        <div class="image">
-          <img src="${imageUrl}" alt="Card Image"> <!-- 建议添加alt属性以提高可访问性 -->
-        </div>
-     </body>
-  </html>
-`
+  let Html = `
+    <html style="background: rgba(255, 255, 255, 0.6)">
+    <head>
+      <link rel="stylesheet" href="https://dd.atxrom.com/1825583963/logier/CSS/style.css"> 
+    </head>
+    <div class="fortune" style="width: 30%; height: 65rem; float: left; text-align: center; background: rgba(255, 255, 255, 0.6);">
+    <h2>今日老婆</h2>
+    <br>
+    <div class="content" style="margin: 0 auto; padding: 12px 12px; height: 49rem; max-width: 980px; max-height: 1024px; background: rgba(255, 255, 255, 0.6); border-radius: 15px; backdrop-filter: blur(3px); box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3); writing-mode: vertical-rl; text-orientation: mixed;">
+        <p style="font-size: 2em">${content}</p>
+    </div>
+    <br>
+    <br>
+    <br>
+    <p>Create By Logier-Plugin </p>
+    </div>
+    <div class="image" style="height:65rem; width: 70%; float: right; box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3); text-align: center;">
+    <img src=${imageUrl} style="height: 100%; filter: brightness(100%); overflow: hidden; display: inline-block; vertical-align: middle; margin: 0; padding: 0;"/>
+    </div>
+    </html>
+    `
 
   let browser
   try {
