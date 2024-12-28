@@ -209,7 +209,7 @@ async function generateFortune (e, replyMessage, content, imageUrl) {
   let Html = `<!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="https://dd.atxrom.com/1825583963/logier/CSS/Tarot.css"> <!-- 保留原有的外部样式表引用 -->
+    <link rel="stylesheet" href="https://dd.atxrom.com/1825583963/logier/CSS/marry.css"> <!-- 保留原有的外部样式表引用 -->
 </head>
     <body>
       <div class="fortune">
