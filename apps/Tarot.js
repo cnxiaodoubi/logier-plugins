@@ -116,26 +116,26 @@ async function 抽塔罗牌 (e, replacedMsg = '', isGPT = false) {
     const page = await browser.newPage()
 
     let Html = `
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="https://dd.atxrom.com/1825583963/logier/CSS/Tarot.css">
+    <link rel="stylesheet" href="styles.css">
+    
 </head>
 <body>
     <div class="fortune">
         <h2>${randomCard.name_cn}</h2>
         <p>${randomCard.name_en}</p>
         <div class="content">
-            <p>${meaning}</p>
+            <p style="font-size: 20px;">${meaning}</p> <!-- 注意：这里的font-size已经在CSS中定义，可以移除内联样式 -->
         </div>
         <h2>${position}</h2>
         <br>
         <p>Create By 鸢尾花插件</p>
     </div>
     <div class="image">
-        <img src="${imageUrl}" alt="Description of the image"> <!-- 添加了alt属性 -->
+        <img src=${imageUrl} />
     </div>
-  
 </body>
 </html>
   `
