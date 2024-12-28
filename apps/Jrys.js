@@ -114,25 +114,28 @@ async function generateFortune (e) {
   const fortune = JSON.parse(data).fortune
 
   let Html = `
-  <html style="background: rgba(255, 255, 255, 0.6)">
-    <head>
-      <link rel="stylesheet" href="https://dd.atxrom.com/1825583963/logier/CSS/style.css"> 
-    </head>
-    <div class="fortune" style="width: 30%; height: 65rem; float: left; text-align: center; background: rgba(255, 255, 255, 0.6);">
+ <html>
+  <head>
+    <link rel="stylesheet" href="https://dd.atxrom.com/1825583963/logier/CSS/jsys.css">
+    <link rel="stylesheet" href="https://dd.atxrom.com/1825583963/logier/CSS/style.css"> 
+  </head>
+  <body>
+    <div class="fortune">
       <p>${nickname}的${await numToChinese(new Date().getDate())}号运势为</p>
       <h2>${fortune.fortuneSummary}</h2>
       <p>${fortune.luckyStar}</p>
-      <div class="content" style="margin: 0 auto; padding: 12px 12px; height: 49rem; max-width: 980px; max-height: 1024px; background: rgba(255, 255, 255, 0.6); border-radius: 15px; backdrop-filter: blur(3px); box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3); writing-mode: vertical-lr; text-orientation: mixed;">
-        <p >${fortune.signText}</p>
-        <p >${fortune.unsignText}</p>
+      <div class="content">
+        <p>${fortune.signText}</p>
+        <p>${fortune.unsignText}</p>
       </div>
       <p>| 相信科学，请勿迷信 |</p>
       <p>Create By 鸢尾花插件 </p>
     </div>
-    <div class="image" style="height:65rem; width: 70%; float: right; box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3); text-align: center;">
-      <img src=${imageUrl} style="height: 100%; filter: brightness(100%); overflow: hidden; display: inline-block; vertical-align: middle; margin: 0; padding: 0;"/>
+    <div class="image">
+      <img src=${imageUrl} />
     </div>
-  </html>
+  </body>
+</html>
   `
 
   let browser
