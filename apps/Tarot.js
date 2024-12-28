@@ -116,23 +116,27 @@ async function 抽塔罗牌 (e, replacedMsg = '', isGPT = false) {
     const page = await browser.newPage()
 
     let Html = `
-  <html style="background: rgba(255, 255, 255, 0.6)">
-  <head>
-    <link rel="stylesheet" href="https://dd.atxrom.com/1825583963/logier/CSS/style.css"> 
-  </head>
-  <div class="fortune" style="width: 35%; height: 65rem; float: left; text-align: center; background: rgba(255, 255, 255, 0.6);">
-    <h2>${randomCard.name_cn}</h2>
-    <p>${randomCard.name_en}</p>
-    <div class="content" style="margin: 0 auto; padding: 12px 12px; height: 49rem; max-width: 980px; max-height: 1024px; background: rgba(255, 255, 255, 0.6); border-radius: 22px; backdrop-filter: blur(3px); box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3); writing-mode: vertical-rl; text-orientation: mixed;">
-    <p style="font-size: 20px;">${meaning}</p>
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://dd.atxrom.com/1825583963/logier/CSS/Tarot.css">
+</head>
+<body>
+    <div class="fortune">
+        <h2>${randomCard.name_cn}</h2>
+        <p>${randomCard.name_en}</p>
+        <div class="content">
+            <p>${meaning}</p>
+        </div>
+        <h2>${position}</h2>
+        <br>
+        <p>Create By 鸢尾花插件</p>
     </div>
-    <h2>${position}</h2>
-    <br>
-    <p>Create By 鸢尾花插件</p>
-  </div>
-  <div class="image" style="height:65rem; width: 65%; float: right; box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3); text-align: center;">
-    <img src=${imageUrl} style="height: 100%; filter: brightness(100%); overflow: hidden; display: inline-block; vertical-align: middle; margin: 0; padding: 0;"/>
-  </div>
+    <div class="image">
+        <img src="${imageUrl}" alt="Description of the image"> <!-- 添加了alt属性 -->
+    </div>
+  
+</body>
 </html>
   `
 

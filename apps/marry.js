@@ -207,26 +207,23 @@ async function generateFortune (e, replyMessage, content, imageUrl) {
   }
 
   let Html = `
-    <html style="background: rgba(255, 255, 255, 0.6)">
-    <head>
-      <link rel="stylesheet" href="https://dd.atxrom.com/1825583963/logier/CSS/style.css"> 
-    </head>
-    <div class="fortune" style="width: 30%; height: 65rem; float: left; text-align: center; background: rgba(255, 255, 255, 0.6);">
-    <h2>今日老婆</h2>
-    <br>
-    <div class="content" style="margin: 0 auto; padding: 12px 12px; height: 49rem; max-width: 980px; max-height: 1024px; background: rgba(255, 255, 255, 0.6); border-radius: 15px; backdrop-filter: blur(3px); box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3); writing-mode: vertical-rl; text-orientation: mixed;">
-        <p style="font-size: 2em">${content}</p>
+  <html>
+  <head>
+    <link rel="stylesheet" href="https://dd.atxrom.com/1825583963/logier/CSS/marry.css"> 
+  </head>
+  <body>
+    <div class="fortune">
+      <h2>今日老婆</h2>
+      <div class="content">
+        <p>${content}</p> 
+      </div>
+      <p>Create By Logier-Plugin </p>
     </div>
-    <br>
-    <br>
-    <br>
-    <p>Create By Logier-Plugin </p>
+    <div class="image">
+      <img src="${imageUrl}" alt="Image" /> 
     </div>
-    <div class="image" style="height:65rem; width: 70%; float: right; box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3); text-align: center;">
-    <img src=${imageUrl} style="height: 100%; filter: brightness(100%); overflow: hidden; display: inline-block; vertical-align: middle; margin: 0; padding: 0;"/>
-    </div>
-    </html>
-    `
+  </body>
+</html>`
 
   let browser
   try {
