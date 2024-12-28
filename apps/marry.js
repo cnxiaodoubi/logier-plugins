@@ -211,18 +211,20 @@ async function generateFortune (e, replyMessage, content, imageUrl) {
   <head>
     <link rel="stylesheet" href="https://dd.atxrom.com/1825583963/logier/CSS/marry.css"> 
   </head>
-  <body>
+ <body>
     <div class="fortune">
-      <h2>今日老婆</h2>
-      <div class="content">
-        <p>${content}</p> 
-      </div>
-      <p>Create By Logier-Plugin </p>
+        <h2>${randomCard.name_cn}</h2>
+        <p>${randomCard.name_en}</p>
+        <div class="content">
+            <p>${meaning}</p> <!-- 内联样式已移除 -->
+        </div>
+        <h2>${position}</h2>
+        <p>Create By 鸢尾花插件</p>
     </div>
     <div class="image">
-      <img src="${imageUrl}" alt="Image" /> 
+        <img src="${imageUrl}" alt="Card Image"> <!-- 建议添加alt属性以提高可访问性 -->
     </div>
-  </body>
+</body> 
 </html>`
 
   let browser
