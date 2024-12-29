@@ -207,11 +207,14 @@ async function generateFortune (e, replyMessage, content, imageUrl) {
     </div>
   </body>
  </html> `
+
+
   let browser
   try {
     browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox', '--disable-setuid-sandbox'] })
     const page = await browser.newPage()
     await page.setContent(Html)
+    await page.waitForSelector('img')
     const image = Buffer.from(await page.screenshot({ fullPage: true }))
     e.reply([replyMessage, segment.image(image)], true)
   } catch (error) {
