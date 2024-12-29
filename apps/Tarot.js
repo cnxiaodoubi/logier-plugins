@@ -139,6 +139,7 @@ async function 抽塔罗牌 (e, replacedMsg = '', isGPT = false) {
   `
 
     await page.setContent(Html)
+    await page.waitForSelector('img')
     const tarotimage = Buffer.from(await page.screenshot({ fullPage: true }))
     e.reply([segment.image(tarotimage)])
   } catch (error) {

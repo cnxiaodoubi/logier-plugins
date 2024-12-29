@@ -109,6 +109,8 @@ async function pushweather (e, pushcity) {
          `
 
     await page.setContent(Html)
+    // 等待页面中的img元素加载完成
+    await page.waitForSelector('img');
     // 获取图片元素
     const imgElement = await page.$('.tu img')
     // 对图片元素进行截图
