@@ -158,6 +158,7 @@ async function generateFortune (e) {
 
     const page = await browser.newPage()
     await page.setContent(Html)
+
     const imgElement = await page.$('.tu img')
     // 对图片元素进行截图
     const image = Buffer.from(await imgElement.screenshot())

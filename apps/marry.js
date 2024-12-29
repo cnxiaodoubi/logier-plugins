@@ -179,7 +179,7 @@ async function generateFortune (e, replyMessage, content, imageUrl) {
     '良缘相遇情不禁，一种缘分两处思',
     '情投意合如芝兰，同心协力共克艰',
     '桃花潭水深千尺，不及汪伦送我情',
-    '花开花落两相知，缘来缘去共相守' ]
+    '花开花落两相知，缘来缘去共相守']
   if (!content) {
     let randomIndex = Math.floor(Math.random() * 结婚诗词.length)
     content = 结婚诗词[randomIndex]
@@ -207,18 +207,30 @@ async function generateFortune (e, replyMessage, content, imageUrl) {
     </div>
   </body>
  </html> `
-  let browser
+
+  let browser;
   try {
-    browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox', '--disable-setuid-sandbox'] })
-    const page = await browser.newPage()
-    await page.setContent(Html)
-    const image = Buffer.from(await page.screenshot({ fullPage: true }))
-    e.reply([replyMessage, segment.image(image)], true)
+    // 启动Puppeteer浏览器实例，设置无头模式，并添加一些启动参数以避免某些环境下的权限问题
+    browser = await puppeteer.launch({headless: 'new', args: ['--no-sandbox', '--disable-setuid-sandbox']});
+
+    // 创建一个新的页面实例
+    const page = await browser.newPage();
+
+    // 设置页面内容为HTML字符串（这里假设Html变量已经定义并包含了要渲染的HTML内容）
+    await page.setContent(Html);
+
+    // 截取整个页面的图片，并将结果转换为Buffer对象
+    const image = Buffer.from(await page.screenshot({fullPage: true}));
+
+    // 发送包含图片的消息
+    e.reply([replyMessage, segment.image(image)], true);
   } catch (error) {
-    logger.info('[今日老婆]：图片渲染失败，使用文本发送')
+    // 如果过程中发生错误，记录日志，并尝试使用文本消息回复
+    logger.info('[今日老婆]：图片渲染失败，使用文本发送');
   } finally {
+    // 无论是否发生错误，确保浏览器实例被关闭
     if (browser) {
-      await browser.close()
+      await browser.close();
     }
   }
 }

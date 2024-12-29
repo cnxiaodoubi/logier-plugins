@@ -84,7 +84,7 @@ async function pushweather (e, pushcity) {
          <!DOCTYPE html>
          <html>
          <head>
-         <link rel="stylesheet" href="https://dd.atxrom.com/qweather-icons/qweather-icons.css">                                  
+         <link rel="stylesheet" href="https://cdn.atxrom.com/icons/qweather-icons.css">                                  
          <link rel="stylesheet" href="https://cdn.atxrom.com/logier/CSS/Weather.css">                         
          </head>
          <body>
@@ -109,11 +109,10 @@ async function pushweather (e, pushcity) {
          `
 
     await page.setContent(Html)
-    // 获取图片元素
+     // 获取图片元素
     const imgElement = await page.$('.tu img')
     // 对图片元素进行截图
     const image = await imgElement.screenshot()
-
     return image
   } catch (error) {
     logger.error(error)

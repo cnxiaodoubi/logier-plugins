@@ -64,7 +64,7 @@ export class TextMsg extends plugin {
     <head>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link rel="stylesheet" href="https://dd.atxrom.com/1825583963/logier/CSS/sign.css"> 
+      <link rel="stylesheet" href="https://cdn.atxrom.com/logier/CSS/sign.css"> 
       <title>Document</title>
     </head>
     <body>
@@ -168,8 +168,7 @@ export class TextMsg extends plugin {
         ctx.globalAlpha = 1;
       };
     }
-  </script>
-          `
+  </script> `
 
 
     let browser
@@ -180,6 +179,7 @@ export class TextMsg extends plugin {
       browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox', '--disable-setuid-sandbox'] })
       const page = await browser.newPage()
       await page.setContent(Html)
+
       const imgElement = await page.$('#main')
       // 对图片元素进行截图
       const image = Buffer.from(await imgElement.screenshot())
