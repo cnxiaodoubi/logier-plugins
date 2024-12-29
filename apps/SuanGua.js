@@ -158,7 +158,7 @@ async function generateFortune (e) {
 
     const page = await browser.newPage();
     // 使用page.goto方法访问目标网址，并等待所有资源加载完成
-    await page.goto('your-url', {waitUntil: 'networkidle2'});
+    await page.goto(Html, {waitUntil: 'networkidle2'});
 
     // 等待页面中的img元素加载完成
     await page.waitForSelector('img');
@@ -174,4 +174,5 @@ async function generateFortune (e) {
       await browser.close();
     }
   }
+
 }
