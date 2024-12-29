@@ -121,61 +121,7 @@ async function generateFortune (e) {
     <!DOCTYPE html>
     <html>
     <head>
-    <style>
-    @font-face {
-    font-family: AlibabaPuHuiTi-2-55-Regular;
-    src:url(https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlibabaPuHuiTi-2/AlibabaPuHuiTi-2-55-Regular/AlibabaPuHuiTi-2-55-Regular.woff2) format('woff2');
-  }
-    * {
-      padding: 0;
-      margin: 0;
-    }
-    html {
-    font-family: 'AlibabaPuHuiTi-2-55-Regular', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
-  }
-    body{
-      position:absolute;
-    }
-    .nei{
-      float: left;
-      box-shadow: 3px 3px 3px #666666;
-      width: 50%;
-      min-width: 400px;
-      height:100%;
-      display:flex;
-      flex-direction: column;
-      justify-content: space-between;
-      border-radius:10px 10px 10px 10px;
-      border:1px solid #a1a1a1;
-      background: rgba(255, 255, 255, 0.6);
-      z-index:1;
-      position:absolute;
-    }
-    p {
-      color : rgba(0,0,0, 0.5);
-      font-size:1.5rem;
-      padding: 2px; 
-      word-wrap: break-word;
-      white-space: pre-wrap;
-      text-align: center; 
-      font-weight: bold;
-    }
-    .centered-content {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      padding: 1em;
-      height: 100%;
-    }
-    .tu{
-    float: left;
-      border:1px solid #00000;
-    }
-    img{
-      border:1px solid #00000;
-      border-radius:10px 10px 10px 10px;
-    }
-    </style>
+    <link rel="stylesheet" href="https://dd.atxrom.com/logier/CSS/suangua.css">
     </head>
     <body>
     <div class="tu">

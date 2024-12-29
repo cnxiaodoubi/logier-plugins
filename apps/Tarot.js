@@ -118,7 +118,7 @@ async function 抽塔罗牌 (e, replacedMsg = '', isGPT = false) {
     let Html = `
   <html>
 <head>
-     <link rel="stylesheet" href="https://dd.atxrom.com/1825583963/logier/CSS/Tarot.css"> 
+     <link rel="stylesheet" href="https://dd.atxrom.com/logier/CSS/Tarot.css"> 
 </head>
 <body>
     <div class="fortune">

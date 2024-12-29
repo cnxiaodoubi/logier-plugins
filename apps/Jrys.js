@@ -116,7 +116,7 @@ async function generateFortune (e) {
   let Html = `
  <html>
   <head>
-    <link rel="stylesheet" href="https://dd.atxrom.com/1825583963/logier/CSS/jsys.css">
+    <link rel="stylesheet" href="https://dd.atxrom.com/logier/CSS/jsys.css">
   </head>
   <body>
     <div class="fortune">
