@@ -188,7 +188,7 @@ async function generateFortune (e, replyMessage, content, imageUrl) {
   let Html = `
   <html>
     <head>
-      <link rel="stylesheet" href="https://dd.atxrom.com/logier/CSS/marry.css">
+      <link rel="stylesheet" href="https://cdn.atxrom.com/logier/CSS/marry.css">
    </head>
   <body>
    <div class="fortune">
@@ -207,15 +207,11 @@ async function generateFortune (e, replyMessage, content, imageUrl) {
     </div>
   </body>
  </html> `
-
-
   let browser
   try {
     browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox', '--disable-setuid-sandbox'] })
     const page = await browser.newPage()
-    // 使用page.goto方法访问目标网址，并等待所有资源加载完成
-    await page.goto(Html, { waitUntil: 'networkidle2' });
-
+    await page.setContent(Html)
     const image = Buffer.from(await page.screenshot({ fullPage: true }))
     e.reply([replyMessage, segment.image(image)], true)
   } catch (error) {

@@ -85,7 +85,7 @@ async function pushweather (e, pushcity) {
          <html>
          <head>
          <link rel="stylesheet" href="https://dd.atxrom.com/qweather-icons/qweather-icons.css">                                  
-         <link rel="stylesheet" href="https://dd.atxrom.com/logier/CSS/Weather.css">                         
+         <link rel="stylesheet" href="https://cdn.atxrom.com/logier/CSS/Weather.css">                         
          </head>
          <body>
          <div class="tu">
@@ -108,8 +108,7 @@ async function pushweather (e, pushcity) {
          </html>
          `
 
-    // 使用page.goto方法访问目标网址，并等待所有资源加载完成
-    await page.goto(Html, { waitUntil: 'networkidle2' });
+    await page.setContent(Html)
     // 获取图片元素
     const imgElement = await page.$('.tu img')
     // 对图片元素进行截图

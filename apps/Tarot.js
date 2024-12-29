@@ -118,7 +118,7 @@ async function 抽塔罗牌 (e, replacedMsg = '', isGPT = false) {
     let Html = `
   <html>
 <head>
-     <link rel="stylesheet" href="https://dd.atxrom.com/logier/CSS/Tarot.css"> 
+     <link rel="stylesheet" href="https://cdn.atxrom.com/logier/CSS/Tarot.css"> 
 </head>
 <body>
     <div class="fortune">
@@ -138,9 +138,7 @@ async function 抽塔罗牌 (e, replacedMsg = '', isGPT = false) {
 </html>        
   `
 
-    // 使用page.goto方法访问目标网址，并等待所有资源加载完成
-    await page.goto(Html, { waitUntil: 'networkidle2' });
-    await page.waitForSelector('img')
+    await page.setContent(Html)
     const tarotimage = Buffer.from(await page.screenshot({ fullPage: true }))
     e.reply([segment.image(tarotimage)])
   } catch (error) {
