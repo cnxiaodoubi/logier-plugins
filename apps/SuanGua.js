@@ -158,10 +158,8 @@ async function generateFortune (e) {
 
     const page = await browser.newPage();
     // 使用page.goto方法访问目标网址，并等待所有资源加载完成
-    await page.goto(Html, {waitUntil: 'networkidle2'});
+    await page.goto(Html, { waitUntil: 'networkidle2' });
 
-    // 等待页面中的img元素加载完成
-    await page.waitForSelector('img');
     const imgElement = await page.$('.tu img');
 
     // 对图片元素进行截图

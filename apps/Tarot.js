@@ -138,7 +138,8 @@ async function 抽塔罗牌 (e, replacedMsg = '', isGPT = false) {
 </html>        
   `
 
-    await page.setContent(Html)
+    // 使用page.goto方法访问目标网址，并等待所有资源加载完成
+    await page.goto(Html, { waitUntil: 'networkidle2' });
     await page.waitForSelector('img')
     const tarotimage = Buffer.from(await page.screenshot({ fullPage: true }))
     e.reply([segment.image(tarotimage)])
