@@ -149,26 +149,29 @@ async function generateFortune (e) {
     </html>
   `
 
-  let browser
+  let browser;
   try {
     browser = await puppeteer.launch({
       headless: 'new',
       args: ['--no-sandbox', '--disable-setuid-sandbox', '--no-proxy-server']
-    })
+    });
 
-    const page = await browser.newPage()
-    await page.setContent(Html)
+    const page = await browser.newPage();
+    // 使用page.goto方法访问目标网址，并等待所有资源加载完成
+    await page.goto('your-url', {waitUntil: 'networkidle2'});
+
     // 等待页面中的img元素加载完成
     await page.waitForSelector('img');
-    const imgElement = await page.$('.tu img')
+    const imgElement = await page.$('.tu img');
+
     // 对图片元素进行截图
-    const image = Buffer.from(await imgElement.screenshot())
-    e.reply(segment.image(image))
+    const image = Buffer.from(await imgElement.screenshot());
+    e.reply(segment.image(image));
   } catch (error) {
-    logger.info('图片渲染失败')
+    logger.info('图片渲染失败');
   } finally {
     if (browser) {
-      await browser.close()
+      await browser.close();
     }
   }
 }
