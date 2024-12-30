@@ -127,22 +127,75 @@ async function 抽塔罗牌 (e, replacedMsg = '', isGPT = false) {
         margin: 0;
         padding: 0;
         font-family: 'AlibabaPuHuiTi-2-55-Regular', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+        height: 100%;
     }         
+    .fortune {
+      width: 90%;
+      height: auto;
+      margin: 10px auto;
+      padding: 15px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .fortune h2 {
+      font-size: 28px;
+      line-height: 1.4;
+      margin: 10px 0;
+    }
+
+    .fortune p {
+      font-size: 18px;
+      margin: 5px 0;
+      line-height: 1.6;
+    }
+
+    .content {
+      padding: 15px;
+      max-width: 980px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 15px;
+      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+      margin-bottom: 20px;
+    }
+
+    .content p {
+      font-size: 20px;
+      line-height: 1.6;
+      word-wrap: break-word;
+      white-space: normal;
+    }
+
+    .image {
+      width: 100%;
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .image img {
+      width: 80%;
+      height: auto;
+      filter: brightness(100%);
+      margin: 0;
+    }
     </style>
   </head>
-  <div class="fortune" style="width: 35%; height: 65rem; float: left; text-align: center; background: rgba(255, 255, 255, 0.6);">
-    <h2>${randomCard.name_cn}</h2>
-    <p>${randomCard.name_en}</p>
-    <div class="content" style="margin: 0 auto; padding: 12px 12px; height: 49rem; max-width: 980px; max-height: 1024px; background: rgba(255, 255, 255, 0.6); border-radius: 22px; backdrop-filter: blur(3px); box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3); writing-mode: vertical-rl; text-orientation: mixed;">
-    <p style="font-size: 20px;">${meaning}</p>
+  <body>
+    <div class="fortune">
+      <h2>${randomCard.name_cn}</h2>
+      <p>${randomCard.name_en}</p>
+      <div class="content">
+        <p>${meaning}</p>
+      </div>
+      <h2>${position}</h2>
+      <p>Create By 鸢尾花插件</p>
     </div>
-    <h2>${position}</h2>
-    <br>
-    <p>Create By 鸢尾花插件</p>
-  </div>
-  <div class="image" style="height:65rem; width: 65%; float: right; box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3); text-align: center;">
-    <img src=${imageUrl} style="height: 100%; filter: brightness(100%); overflow: hidden; display: inline-block; vertical-align: middle; margin: 0; padding: 0;"/>
-  </div>
+    <div class="image">
+      <img src=${imageUrl} />
+    </div>
+  </body>
 </html>
   `
 
