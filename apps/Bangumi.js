@@ -114,7 +114,7 @@ async function getItems () {
     // 提取 name_cn、rating 和 images 属性并组成新的数组
     let itemDetails = items.map(item => {
         return {
-            name: item.name_cn || '',
+            name: item.name || '',
             score: item.rating ? item.rating.score : '',
             image: item.images ? item.images.common : ''
         }
