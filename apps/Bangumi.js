@@ -110,7 +110,7 @@ async function getItems () {
     }).filter(item => item.name && item.score && item.image) // 过滤掉任何属性为空的项
     logger.info(itemDetails)
     // 将 itemDetails 存入 Redis
-    await redis.set(`itemDetails`, JSON.stringify(itemDetails),{ EX: 14400 })
+    await redis.set(`itemDetails`, JSON.stringify(itemDetails),{ EX: 3600 })
 
     return itemDetails
 }
