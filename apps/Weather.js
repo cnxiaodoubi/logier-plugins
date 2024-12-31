@@ -84,8 +84,7 @@ async function pushweather (e, pushcity) {
          <!DOCTYPE html>
          <html>
          <head>
-         <link rel="stylesheet" href="https://cdn.atxrom.com/icons/qweather-icons.css">                                  
-         <link rel="stylesheet" href="https://cdn.atxrom.com/logier/CSS/Weather.css">                         
+         <link rel="stylesheet" href="https://cdn.atxrom.com/logier/CSS/weather.css">
          </head>
          <body>
          <div class="tu">
