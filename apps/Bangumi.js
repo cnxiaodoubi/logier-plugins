@@ -113,7 +113,7 @@ async function getItems () {
     await redis.set(`itemDetails`, JSON.stringify(itemDetails),{ EX: 14400 })
 
     return itemDetails
-}}
+}
 
 async function test() {
     // 从 Redis 获取数据，如果 Redis 中没有数据，则先获取并存入
