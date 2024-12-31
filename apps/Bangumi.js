@@ -91,9 +91,18 @@ export class TextMsg extends plugin {
 
 async function getItems () {
 
-    let response = await fetch('https://api.bgm.tv/calendar')
+    let response = null;
 
-    let data = await response.json()
+    try {
+        response = await fetch('https://api.bgm.tv/calendar');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+    } catch (error) {
+        console.error('Fetch error:', error);
+    }
+    if (response) {
+        let data = await response.json();
 
     let now = new Date()
 
@@ -110,15 +119,12 @@ async function getItems () {
             image: item.images ? item.images.common : ''
         }
     }).filter(item => item.name && item.score && item.image) // 过滤掉任何属性为空的项
-
     logger.info(itemDetails)
     // 将 itemDetails 存入 Redis
     await redis.set(`itemDetails`, JSON.stringify(itemDetails),{ EX: 14400 })
 
-
-
     return itemDetails
-}
+}}
 
 async function test() {
     // 从 Redis 获取数据，如果 Redis 中没有数据，则先获取并存入
