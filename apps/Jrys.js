@@ -114,34 +114,96 @@ async function generateFortune (e) {
   const fortune = JSON.parse(data).fortune
 
   let Html = `
-  <html style="background: rgba(255, 255, 255, 0.6)">
+  <html>
     <head>
-    <style>
-    @font-face {
-      font-family: AlibabaPuHuiTi-2-55-Regular;
-      src:url(https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlibabaPuHuiTi-2/AlibabaPuHuiTi-2-55-Regular/AlibabaPuHuiTi-2-55-Regular.woff2) format('woff2');
-    }  
-    html, body {
-        margin: 0;
-        padding: 0;
-        font-family: 'AlibabaPuHuiTi-2-55-Regular', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
-    }          
-    </style>
+      <style>
+        @font-face {
+          font-family: AlibabaPuHuiTi-2-55-Regular;
+          src: url(https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlibabaPuHuiTi-2/AlibabaPuHuiTi-2-55-Regular/AlibabaPuHuiTi-2-55-Regular.woff2) format('woff2');
+        }
+
+        html, body {
+          margin: 0;
+          padding: 0;
+          font-family: 'AlibabaPuHuiTi-2-55-Regular', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+          background: rgba(255, 255, 255, 0.6);
+        }
+
+        .container {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          width: 100%;
+          height: 100vh;
+          padding: 20px;
+          box-sizing: border-box;
+        }
+
+        .fortune {
+          width: 30%;
+          text-align: center;
+          background: rgba(255, 255, 255, 0.8);
+          padding: 20px;
+          border-radius: 15px;
+          backdrop-filter: blur(8px);
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .fortune h2 {
+          font-size: 1.8rem;
+          line-height: 2.2rem;
+          color: #333;
+          margin-bottom: 15px;
+        }
+
+        .content {
+          margin: 20px auto;
+          padding: 15px;
+          background: rgba(240, 240, 240, 0.9);
+          border-radius: 12px;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+          overflow-y: auto;
+          max-height: 60vh;
+          text-align: left;
+          line-height: 1.5;
+          font-size: 0.95rem;
+          color: #444;
+        }
+
+        .image {
+          width: 65%;
+          height: auto;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+          text-align: center;
+        }
+
+        .image img {
+          width: 100%;
+          height: auto;
+          object-fit: cover;
+          border-radius: 10px;
+          filter: brightness(95%);
+        }
+      </style>
     </head>
-    <div class="fortune" style="width: 30%; height: 65rem; float: left; text-align: center; background: rgba(255, 255, 255, 0.6);">
-      <p>${nickname}的${await numToChinese(new Date().getDate())}号运势为</p>
-      <h2>${fortune.fortuneSummary}</h2>
-      <p>${fortune.luckyStar}</p>
-      <div class="content" style="margin: 0 auto; padding: 12px 12px; height: 49rem; max-width: 980px; max-height: 1024px; background: rgba(255, 255, 255, 0.6); border-radius: 15px; backdrop-filter: blur(3px); box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3); writing-mode: vertical-lr; text-orientation: mixed;">
-        <p >${fortune.signText}</p>
-        <p >${fortune.unsignText}</p>
+    <body>
+      <div class="container">
+        <div class="fortune">
+          <p>${nickname}的${await numToChinese(new Date().getDate())}号运势为</p>
+          <h2>${fortune.fortuneSummary}</h2>
+          <p>${fortune.luckyStar}</p>
+          <div class="content">
+            <p>${fortune.signText}</p>
+            <p>${fortune.unsignText}</p>
+          </div>
+          <p>| 相信科学，请勿迷信 |</p>
+          <p>Create By 鸢尾花插件</p>
+        </div>
+        <div class="image">
+          <img src="${imageUrl}" />
+        </div>
       </div>
-      <p>| 相信科学，请勿迷信 |</p>
-      <p>Create By 鸢尾花插件 </p>
-    </div>
-    <div class="image" style="height:65rem; width: 70%; float: right; box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3); text-align: center;">
-      <img src=${imageUrl} style="height: 100%; filter: brightness(100%); overflow: hidden; display: inline-block; vertical-align: middle; margin: 0; padding: 0;"/>
-    </div>
+    </body>
   </html>
   `
 
@@ -150,6 +212,7 @@ async function generateFortune (e) {
     browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox', '--disable-setuid-sandbox'] })
     const page = await browser.newPage()
     await page.setContent(Html)
+    await page.waitForSelector('img')  
     const image = Buffer.from(await page.screenshot({ fullPage: true }))
     e.reply(segment.image(image))
   } catch (error) {
