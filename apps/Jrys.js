@@ -124,8 +124,7 @@ async function generateFortune (e) {
               font-weight: normal; /* 可以添加，如果字体有特定的重量 */
               font-style: normal;  /* 可以添加，如果字体有特定的样式（如斜体） */
           }
-          
-          /* 基础样式重置 */
+            /* 基础样式重置 */
           html, body {
               margin: 0;
               padding: 0;

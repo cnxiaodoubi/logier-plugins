@@ -20,7 +20,6 @@ export class TextMsg extends plugin {
   }
 
   get UrlsConfig () { return getFunctionData('Urls', 'Urls', '今日签到') }
-
   async 今日签到 (e) {
     let now = new Date()
     let datatime = now.toLocaleDateString('zh-CN') // 日期格式
@@ -63,9 +62,7 @@ export class TextMsg extends plugin {
   <html lang="zh">
     <head>
       <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      
-      
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />      
       <style>
        html,
        body {
