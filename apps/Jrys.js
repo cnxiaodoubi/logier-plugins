@@ -118,7 +118,6 @@ async function generateFortune (e) {
 <html lang="zh-CN">
 <head>
   <title>运势页面</title>
-  <style>
 /* jrys.css */
 /* 定义自定义字体 */
 @font-face {
@@ -178,7 +177,6 @@ html {
     padding: 0;
 }
 
-  </style>
 
 </head>
 <body>
