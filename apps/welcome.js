@@ -63,20 +63,30 @@ export class outNotice extends plugin {
     this.tips = '退群了'
   }
 
-  async accept () {
-    if (this.e.user_id == this.e.bot.uin) return
+  async accept(event) {
+    // 如果退群的是机器人本身，则不处理
+    if (event.user_id === event.bot.uin) return;
 
-    let name, msg
-    if (this.e.member) {
-      name = this.e.member.card || this.e.member.nickname
+    let name = '未知用户';
+
+    // 调试信息：输出 event.member 对象
+    logger.debug(`event.member: ${JSON.stringify(event.member)}`);
+
+    // 获取退群成员的昵称或卡片名称
+    if (event.member && (event.member.card || event.member.nickname)) {
+      name = event.member.card || event.member.nickname;
     }
 
-    if (name) {
-      msg = `${name}(${this.e.user_id}) ${this.tips}`
-    } else {
-      msg = `${this.e.user_id} ${this.tips}`
-    }
-    logger.mark(`[退出通知]${this.e.logText} ${msg}`)
-    await this.reply(msg)
+    // 构建通知消息
+    const msg = `${name}(${event.user_id}) ${this.tips}`;
+
+    // 记录日志
+    logger.info(`[退出通知] ${event.logText} ${msg}`);
+
+    // 回复消息到群聊
+    await this.bot.sendGroupMsg({
+      group_id: event.group_id,
+      message: msg,
+    });
   }
 }
