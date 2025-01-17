@@ -10,7 +10,7 @@ API:
     "PushTime": 00 30 9 * * ?
     PushGroupList: []
   - FunctionName: 真寻日报
-    SourceUrl: https://api.atxrom.cn/
+    SourceUrl: https://moyu.atxrom.com/
     isAutoPush: false
     "PushTime": 0 30 7 * * ?
     PushGroupList: []
