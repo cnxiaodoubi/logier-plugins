@@ -124,17 +124,6 @@ export function supportGuoba() {
       },
     },
     {
-      field: 'EmojiThief.DefalutReplyRate',
-      label: '默认概率',
-      bottomHelpMessage: '不配置群时使用此概率',
-      component: "Slider",
-      componentProps: {
-        min: 0,
-        max: 1,
-        step: 0.01,
-      },
-    },
-    {
       field: 'EmojiThief.DefalutEmojiRate',
       label: '仓库概率',
       bottomHelpMessage: '使用表情包仓库发图的默认概率，如果偷的图比较少推荐拉高点，减少发图重复',
@@ -328,7 +317,7 @@ export function supportGuoba() {
     field: 'Weather.WeatherPushTime',
     label: '推送时间',
     component: 'EasyCron',
-          
+
   },
   {
     field: "Weather.WeatherPushgroup",
