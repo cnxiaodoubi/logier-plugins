@@ -123,6 +123,7 @@ export function supportGuoba() {
         ],
       },
     },
+
     {
       field: 'EmojiThief.DefalutEmojiRate',
       label: '仓库概率',
