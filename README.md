@@ -31,9 +31,9 @@ gitee
 ```
 git clone --depth=1 https://gitee.com/logier/logier-plugins.git ./plugins/logier-plugin/
 ```
-gitee([@xiaodoubi](https://gitee.com/cnxiaodoubi/logier-plugins)分支版本)
+github([@xiaodoubi](https://gihub.com/cnxiaodoubi/logier-plugins)分支版本)
 ```
-git clone --depth=1 https://gitee.com/cnxiaodoubi/logier-plugins.git ./plugins/logier-plugin/
+git clone --depth=1 https://gihub.com/cnxiaodoubi/logier-plugins.git ./plugins/logier-plugin/
 ```
 
 github
