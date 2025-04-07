@@ -24,39 +24,71 @@ export class TextMsg extends plugin {
     let now = new Date()
     let datatime = now.toLocaleDateString('zh-CN') 
 
+    // 获取一言数据
     const response = await fetch('https://v1.hitokoto.cn')
     const hitokodata = await response.json()
     const content = hitokodata.hitokoto
 
+    // 获取随机图片
     let imageUrl = await getImageUrl(this.UrlsConfig.imageUrls, './plugins/logier-plugin/resources/gallery/114388636.webp')
 
-    let data = JSON.parse(await redis.get(`Yunzai:logier-plugin:${e.user_id}_sign`))
+    // 修复点1：安全解析 Redis 数据，避免 JSON.parse 报错
+    let data
+    try {
+      const redisData = await redis.get(`Yunzai:logier-plugin:${e.user_id}_sign`)
+      data = redisData ? JSON.parse(redisData) : null
+    } catch (err) {
+      logger.error('解析签到数据失败:', err)
+      data = null
+    }
+
     const addfavor = Math.floor(Math.random() * 10) + 1
     let issign = `好感度+${addfavor}`
-    if (!data) {
+
+    // 初始化或更新签到数据
+    if (!data || typeof data !== 'object') {
       data = { favor: addfavor, time: datatime }
     } else if (data.time !== datatime) {
       data.favor += addfavor
       data.time = datatime
-    } else if (data.time == datatime) {
+    } else if (data.time === datatime) {
       issign = '今日已经签到了'
     }
 
+    // 存储数据到 Redis
     await redis.set(`Yunzai:logier-plugin:${e.user_id}_sign`, JSON.stringify(data))
-    let finaldata = JSON.parse(await redis.get(`Yunzai:logier-plugin:${e.user_id}_sign`))
 
-    let groupdata = JSON.parse(await redis.get(`Yunzai:logier-plugin:group${e.group_id}_sign`)) || {}
+    // 修复点2：再次获取数据时也做安全解析
+    let finaldata
+    try {
+      const finalRedisData = await redis.get(`Yunzai:logier-plugin:${e.user_id}_sign`)
+      finaldata = finalRedisData ? JSON.parse(finalRedisData) : data // 如果解析失败，回退到当前 data
+    } catch (err) {
+      logger.error('解析最终数据失败:', err)
+      finaldata = data
+    }
+
+    // 处理群排名数据
+    let groupdata = {}
+    try {
+      const groupRedisData = await redis.get(`Yunzai:logier-plugin:group${e.group_id}_sign`)
+      groupdata = groupRedisData ? JSON.parse(groupRedisData) : {}
+    } catch (err) {
+      logger.error('解析群数据失败:', err)
+      groupdata = {}
+    }
+
     groupdata[e.user_id] = data.favor
-
     await redis.set(`Yunzai:logier-plugin:group${e.group_id}_sign`, JSON.stringify(groupdata))
 
+    // 计算排名
     let favorValues = Object.values(groupdata)
     favorValues.sort((a, b) => b - a)
-
     let position = favorValues.indexOf(data.favor) + 1
 
     let nickname = e.nickname ? e.nickname : e.sender.card
 
+    // 生成 HTML
     let Html = `
   <!DOCTYPE html>
   <html lang="zh">
@@ -168,6 +200,7 @@ export class TextMsg extends plugin {
   </html>
           `
 
+    // 使用 Puppeteer 渲染图片
     let browser
     try {
       if (!imageUrl) {
@@ -180,7 +213,8 @@ export class TextMsg extends plugin {
       const image = Buffer.from(await imgElement.screenshot())
       e.reply(segment.image(image))
     } catch (error) {
-      logger.info('图片渲染失败')
+      logger.error('签到图片渲染失败:', error)
+      e.reply('签到成功，但图片生成失败，请稍后再试~')
     } finally {
       if (browser) {
         await browser.close()
