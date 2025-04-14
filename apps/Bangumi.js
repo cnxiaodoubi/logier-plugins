@@ -88,28 +88,32 @@ export class TextMsg extends plugin {
   }
 }
 
-async function getItems () {
-  let response = await fetch('https://api.bgm.tv/calendar')
-  let data = await response.json()
+async function getItems() {
+    let response = await fetch('https://api.bgm.tv/calendar', {
+        headers: {
+            'User-Agent': 'bangumi-app/1.0 (https://example.com)'
+        }
+    });
+    let data = await response.json();
 
-  let now = new Date()
-  let weekday = (now.getDay() + 6) % 7 + 1 // 将星期日转换为7，星期一到星期六转换为1到6
+    let now = new Date();
+    let weekday = (now.getDay() + 6) % 7 + 1; // 将星期日转换为7，星期一到星期六转换为1到6
+    
+    // 找到对应星期的项目
+    let items = data.find(item => item.weekday.id === weekday).items;
+    
+    // 提取 name_cn、rating 和 images 属性并组成新的数组
+    let itemDetails = items.map(item => {
+        return {
+            name: item.name_cn || item.name || '',
+            score: item.rating ? item.rating.score : '',
+            image: item.images ? item.images.common : ''
+        };
+    }).filter(item => item.name && item.score && item.image); // 过滤掉任何属性为空的项
 
-  // 找到对应星期的项目
-  let items = data.find(item => item.weekday.id === weekday).items
+    logger.info(itemDetails)
 
-  // 提取 name_cn、rating 和 images 属性并组成新的数组
-  let itemDetails = items.map(item => {
-    return {
-      name: item.name_cn || item.name || '',
-      score: item.rating ? item.rating.score : '',
-      image: item.images ? item.images.common : ''
-    }
-  }).filter(item => item.name && item.score && item.image) // 过滤掉任何属性为空的项
-
-  logger.info(itemDetails)
-
-  return itemDetails
+    return itemDetails;
 }
 
 async function test () {
