@@ -1,11 +1,18 @@
 import puppeteer from 'puppeteer'
 import { NumToRoman, getImageUrl, getFunctionData } from '../utils/getdate.js'
 import fetch from 'node-fetch'
+import fs from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
 
 import setting from '../model/setting.js'
 
+// 获取当前文件所在目录
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
 export class example extends plugin {
-  constructor () {
+  constructor() {
     super({
       name: '[鸢尾花插件]今日天气',
       dsc: '今日天气',
@@ -26,11 +33,11 @@ export class example extends plugin {
     Object.defineProperty(this.task, 'log', { get: () => false })
   }
 
-  get Config () {
+  get Config() {
     return setting.getConfig('Weather')
   }
 
-  async 推送城市天气 (e) {
+  async 推送城市天气(e) {
     if (!this.Config.WeatherPushSwitch) { return false }
 
     logger.info('[城市天气]开始推送……')
@@ -42,11 +49,11 @@ export class example extends plugin {
     return true
   }
 
-  async 城市天气 (e) {
+  async 城市天气(e) {
     logger.info(this.Config.WeatherPushSwitch)
     logger.info(this.Config.WeatherPushgroup)
 
-    const image = Buffer.from(await pushweather(e)) // 添加了 await
+    const image = Buffer.from(await pushweather(e))
     e.reply([segment.image(image)])
 
     return true
@@ -54,61 +61,80 @@ export class example extends plugin {
 }
 
 const WeatherKey = setting.getConfig('Weather').WeatherKey
-
-async function pushweather (e, pushcity) {
+async function pushweather(e, pushcity) {
   const city = (e?.msg ?? '').replace(/#?(天气)/, '').trim()
   const cityToUse = city || pushcity
 
   const { location, name } = await getCityGeo(cityToUse, WeatherKey)
-
   const output = await getIndices(location, WeatherKey)
-
   const { forecastresult, iconDays, iconNights } = await getForecast(location, WeatherKey)
 
   let now = new Date()
-  let datatime = now.toLocaleDateString('zh-CN') // 日期格式
+  let datatime = now.toLocaleDateString('zh-CN')
   let days = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
-  let dayOfWeek = days[now.getDay()] // 日期转换为星期几
+  let dayOfWeek = days[now.getDay()]
 
   const urlConfig = await getFunctionData('Urls', 'Urls', '城市天气')
-
   let imageUrl = await getImageUrl(urlConfig.imageUrls)
-
-
   let browser
   try {
-    browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox', '--disable-setuid-sandbox'] })
+    browser = await puppeteer.launch({ 
+      headless: 'new', 
+      args: ['--no-sandbox', '--disable-setuid-sandbox'] 
+    })
     const page = await browser.newPage()
 
+    // 1. 读取本地CSS文件内容
+    const cssPath = path.join(__dirname, '../resources/font/qweather-icons.css')
+    let localCss = fs.readFileSync(cssPath, 'utf-8')
+    
+    // 2. 将相对路径转换为绝对路径
+    const fontsBasePath = path.join(__dirname, '../resources/font/fonts/')
+    localCss = localCss.replace(
+      /url\(['"]?(\.\/fonts\/qweather-icons[^'"]*)['"]?\)/g, 
+      (match, p1) => {
+        const fontFilename = path.basename(p1.split('?')[0]) // 去除查询参数
+        const fontPath = path.join(fontsBasePath, fontFilename)
+        const fontData = fs.readFileSync(fontPath)
+        const base64 = fontData.toString('base64')
+        
+        // 根据文件类型设置MIME类型
+        const mimeType = fontFilename.endsWith('.woff2') ? 'font/woff2' : 
+                        fontFilename.endsWith('.woff') ? 'font/woff' : 
+                        'font/truetype'
+        
+        return `url(data:${mimeType};base64,${base64})`
+      }
+    )
+
+    // 3. 使用修改后的CSS（保持您原始的HTML结构）
     let Html = `
-         <!DOCTYPE html>
-         <html>
-         <head>
-         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/qweather-icons@1.6.0/font/qweather-icons.css">
-         <link rel="stylesheet" href="https://cdn.atxrom.cn/logier/style.css">
-         
-         </head>
-         <body>
-         <div class="tu">
-             <img src ="${imageUrl}" height=1024px>
-         </div>
-         <div class="nei">
-           <div class="centered-content">
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="UTF-8">
+        <style>${localCss}</style>
+      </head>
+      <body>
+        <div class="tu">
+          <img src="${imageUrl}" height="1024px">
+        </div>
+        <div class="nei">
+          <div class="centered-content">
             <br>
             <h2 style="font-weight:bolder; font-size: 2.2em;">${datatime} ${dayOfWeek} ${name}</h2>
             <br>
             <i style="font-size: 3em;" class="qi-${iconDays[0]}"> / <i class="qi-${iconNights[0]}"></i></i>
-             <p style="font-weight:bolder; font-size: 2em; line-height:"150%">${forecastresult[0]}</p>
-             <br>
-             <p>${output}</p>
-           </div>
-           <br>
-           <p style="font-weight: bold; margin-bottom: 20px; text-align: center;">Create By 鸢尾花插件 </p>
-         </div>
-         </body>
-         </html>
-         `
-
+            <p style="font-weight:bolder; font-size: 2em; line-height:150%">${forecastresult[0]}</p>
+            <br>
+            <p>${output}</p>
+          </div>
+          <br>
+          <p style="font-weight: bold; margin-bottom: 20px; text-align: center;">Create By 鸢尾花插件</p>
+        </div>
+      </body>
+      </html>
+    `
     await page.setContent(Html)
      // 获取图片元素
     const imgElement = await page.$('.tu img')
@@ -123,7 +149,6 @@ async function pushweather (e, pushcity) {
     }
   }
 }
-
 async function getCityGeo (city, WeatherKey) {
   const cityGeo = `https://geoapi.qweather.com/v2/city/lookup?location=${city}&key=${WeatherKey}`
   const cityGeoresponse = await fetch(cityGeo)
