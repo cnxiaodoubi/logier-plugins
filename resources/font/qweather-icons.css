@@ -7,9 +7,10 @@
 
 @font-face {
   font-family: "qweather-icons";
-  src: url("https://dd.atxrom.com/qweather-icons/fonts/qweather-icons.woff2") format("woff2"),
-       url("https://dd.atxrom.com/qweather-icons/fonts/qweather-icons.woff") format("woff"),
-       url("https://dd.atxrom.com/qweather-icons/fonts/qweather-icons.ttf") format("truetype");}
+  src: url("./fonts/qweather-icons.woff2?c4a8eb216e1e59e6c4df464b9ee6f9be") format("woff2"),
+url("./fonts/qweather-icons.woff?c4a8eb216e1e59e6c4df464b9ee6f9be") format("woff"),
+url("./fonts/qweather-icons.ttf?c4a8eb216e1e59e6c4df464b9ee6f9be") format("truetype");
+}
 
 [class^="qi-"]::before,
 [class*=" qi-"]::before {
