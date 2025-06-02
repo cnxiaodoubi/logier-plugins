@@ -123,7 +123,7 @@ async function generateFortune (e) {
 
 
 // 1. 读取本地CSS文件内容
-const cssPath = path.join(__dirname, '');
+const cssPath = path.join(__dirname, '../resources/css/jrys.css');
 let localCss = fs.readFileSync(cssPath, 'utf-8');
 
 // 2. 将CSS中的字体路径转换为base64内联
