@@ -2,7 +2,9 @@ import puppeteer from 'puppeteer'
 import common from '../../../lib/common/common.js'
 import { readAndParseJSON, gpt } from '../utils/getdate.js'
 import setting from '../model/setting.js'
+import fs from 'fs'
 import path from 'path'
+import { fileURLToPath } from 'url'
 
 export class TextMsg extends plugin {
   constructor () {
