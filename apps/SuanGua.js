@@ -3,6 +3,9 @@ import { readAndParseJSON, getFunctionData, getImageUrl } from '../utils/getdate
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+// 获取当前文件所在目录
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 export class TextMsg extends plugin {
   constructor () {
