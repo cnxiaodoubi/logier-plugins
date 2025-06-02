@@ -185,78 +185,52 @@ async function generateFortune (e, replyMessage, content, imageUrl) {
     content = 结婚诗词[randomIndex]
   }
 
-  let Html = `
-  <html>
-    <head>
-      <style>
-             /* 自定义字体定义 */
-          @font-face {
-              font-family: 'HarmonyOS';
-              src: url('https://dd.atxrom.com/font/HarmonyOS.woff2') format('woff2');
-              font-weight: normal; /* 明确指定字体权重，尽管默认为normal */
-              font-style: normal;  /* 明确指定字体样式，尽管默认为normal */
-          }
-          
-          /* 全局样式重置与设置 */
-          html, body {
-              margin: 0;
-              padding: 0;
-              box-sizing: border-box; /* 简化元素尺寸计算，包含padding和border */
-              font-family: 'HarmonyOS', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
-              line-height: 1.6; /* 设置行高，提高文本可读性 */
-              /* 可选：设置全局字体大小、颜色等 */
-              /* font-size: 16px; */
-              /* color: #333; */
-          }
-          /* marry.css */
-          body, html {
-              background: rgba(255, 255, 255, 0.6);
-          }
-          
-          .fortune {
-              width: 30%;
-              height: 65rem;
-              float: left;
-              text-align: center;
-          }
-          
-          .fortune .content {
-              margin: 0 auto;
-              padding: 12px 12px;
-              height: 49rem;
-              max-width: 980px;
-              max-height: 1024px;
-              background: rgba(255, 255, 255, 0.6);
-              border-radius: 15px;
-              backdrop-filter: blur(3px);
-              box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
-              writing-mode: vertical-rl;
-              text-orientation: mixed;
-          }
-          
-          .fortune .content p {
-              font-size: 2em;
-          }
-          
-          .image {
-              height: 65rem;
-              width: 70%;
-              float: right;
-              box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
-              text-align: center;
-          }
-          
-          .image img {
-              height: 100%;
-              filter: brightness(100%);
-              overflow: hidden;
-              display: inline-block;
-              vertical-align: middle;
-              margin: 0;
-              padding: 0;
-          }
+// 1. 读取本地CSS文件内容
+const cssPath = path.join(__dirname, '../resources/css/marry.css');
+let localCss = fs.readFileSync(cssPath, 'utf-8');
+
+// 2. 将CSS中的字体路径转换为base64内联
+const cssDir = path.dirname(cssPath); // 获取CSS文件所在目录
+localCss = localCss.replace(
+  /url\(['"]?(\.\/)?([^'")]+)['"]?\)/g,  // 匹配所有url()引用
+  (match, prefix, fontPath) => {
+    // 如果路径是相对路径(以./开头)，则基于CSS文件目录解析
+    const fullFontPath = prefix === './' 
+      ? path.join(cssDir, fontPath)
+      : path.join(cssDir, fontPath); // 如果不是./开头也尝试同一目录
+    
+    try {
+      const fontData = fs.readFileSync(fullFontPath);
+      const base64 = fontData.toString('base64');
       
-     </style>
+      // 根据文件扩展名确定MIME类型
+      const extension = path.extname(fullFontPath).toLowerCase();
+      const mimeTypes = {
+        '.ttf': 'font/truetype',
+        '.woff': 'font/woff',
+        '.woff2': 'font/woff2',
+        '.eot': 'application/vnd.ms-fontobject',
+        '.otf': 'font/opentype',
+        '.svg': 'image/svg+xml'
+      };
+      
+      const mimeType = mimeTypes[extension] || 'application/octet-stream';
+      
+      return `url(data:${mimeType};base64,${base64})`;
+    } catch (err) {
+      console.error(`无法加载字体文件: ${fullFontPath}`, err);
+      return match; // 如果文件读取失败，返回原始引用
+    }
+  }
+);
+
+// 3. 使用修改后的CSS
+let Html = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>${localCss}</style>
    </head>
   <body>
    <div class="fortune">

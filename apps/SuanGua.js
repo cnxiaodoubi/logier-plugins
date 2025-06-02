@@ -116,75 +116,54 @@ async function generateFortune (e) {
 
   let replacedMsg = e.msg.replace(/^#?(算一卦|算卦)/, '')
   let content = [nickname + '心中所念' + (replacedMsg ? '“' + replacedMsg + '”' : '') + '卦象如下:']
+  
 
-  let Html = `
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <style>
-        /* 定义自定义字体 */
-           @font-face {
-               font-family: 'HarmonyOS';
-               src: url('https://dd.atxrom.com/font/HarmonyOS.woff2') format('woff2');
-               font-weight: normal; /* 可以添加，如果字体有特定的重量 */
-               font-style: normal;  /* 可以添加，如果字体有特定的样式（如斜体） */
-           }
-           
-           /* 基础样式重置 */
-           html, body {
-               margin: 0;
-               padding: 0;
-               box-sizing: border-box; /* 添加此属性可以简化元素宽度和高度的计算 */
-               font-family: 'HarmonyOS', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
-               line-height: 2.0; /* 可以添加一个默认的行高，使文本更易读 */
-               /* 其他基础样式，如字体颜色、背景颜色等，也可以在这里设置 */
-           }
-           
-           /* suangua.css */
-           body{
-               position:absolute;
-           }
-           .nei{
-               float: left;
-               box-shadow: 3px 3px 3px #666666;
-               width: 50%;
-               min-width: 400px;
-               height:100%;
-               display:flex;
-               flex-direction: column;
-               justify-content: space-between;
-               border-radius:10px 10px 10px 10px;
-               border:1px solid #a1a1a1;
-               background: rgba(255, 255, 255, 0.6);
-               z-index:1;
-               position:absolute;
-           }
-           p {
-               color : rgba(0,0,0, 0.5);
-               font-size:1.5rem;
-               padding: 2px;
-               word-wrap: break-word;
-               white-space: pre-wrap;
-               text-align: center;
-               font-weight: bold;
-           }
-           .centered-content {
-               display: flex;
-               flex-direction: column;
-               justify-content: flex-start;
-               padding: 1em;
-               height: 100%;
-           }
-           .tu{
-               float: left;
-               border:1px solid #00000;
-           }
-           img{
-               border:1px solid #00000;
-               border-radius:10px 10px 10px 10px;
-           }
+ // 1. 读取本地CSS文件内容
+const cssPath = path.join(__dirname, '../resources/css/suangua.css');
+let localCss = fs.readFileSync(cssPath, 'utf-8');
+
+// 2. 将CSS中的字体路径转换为base64内联
+const cssDir = path.dirname(cssPath); // 获取CSS文件所在目录
+localCss = localCss.replace(
+  /url\(['"]?(\.\/)?([^'")]+)['"]?\)/g,  // 匹配所有url()引用
+  (match, prefix, fontPath) => {
+    // 如果路径是相对路径(以./开头)，则基于CSS文件目录解析
+    const fullFontPath = prefix === './' 
+      ? path.join(cssDir, fontPath)
+      : path.join(cssDir, fontPath); // 如果不是./开头也尝试同一目录
     
-      </style>
+    try {
+      const fontData = fs.readFileSync(fullFontPath);
+      const base64 = fontData.toString('base64');
+      
+      // 根据文件扩展名确定MIME类型
+      const extension = path.extname(fullFontPath).toLowerCase();
+      const mimeTypes = {
+        '.ttf': 'font/truetype',
+        '.woff': 'font/woff',
+        '.woff2': 'font/woff2',
+        '.eot': 'application/vnd.ms-fontobject',
+        '.otf': 'font/opentype',
+        '.svg': 'image/svg+xml'
+      };
+      
+      const mimeType = mimeTypes[extension] || 'application/octet-stream';
+      
+      return `url(data:${mimeType};base64,${base64})`;
+    } catch (err) {
+      console.error(`无法加载字体文件: ${fullFontPath}`, err);
+      return match; // 如果文件读取失败，返回原始引用
+    }
+  }
+);
+
+// 3. 使用修改后的CSS
+let Html = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>${localCss}</style>
     </head>
     <body>
     <div class="tu">
