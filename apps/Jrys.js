@@ -1,5 +1,6 @@
 import puppeteer from 'puppeteer'
 import { readAndParseJSON, getFunctionData, numToChinese, getImageUrl } from '../utils/getdate.js'
+import path from 'path'
 
 export class TextMsg extends plugin {
   constructor () {
@@ -116,7 +117,7 @@ async function generateFortune (e) {
 
 
 // 1. 读取本地CSS文件内容
-const cssPath = path.join(__dirname, '../resources/css/jrys.css');
+const cssPath = path.join(__dirname, '');
 let localCss = fs.readFileSync(cssPath, 'utf-8');
 
 // 2. 将CSS中的字体路径转换为base64内联

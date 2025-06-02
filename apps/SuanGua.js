@@ -1,5 +1,6 @@
 import puppeteer from 'puppeteer'
 import { readAndParseJSON, getFunctionData, getImageUrl } from '../utils/getdate.js'
+import path from 'path'
 
 export class TextMsg extends plugin {
   constructor () {

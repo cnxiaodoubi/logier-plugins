@@ -1,4 +1,5 @@
 import puppeteer from 'puppeteer'
+import path from 'path'
 
 export class example extends plugin {
   constructor () {

@@ -2,6 +2,7 @@ import puppeteer from 'puppeteer'
 import common from '../../../lib/common/common.js'
 import { readAndParseJSON, gpt } from '../utils/getdate.js'
 import setting from '../model/setting.js'
+import path from 'path'
 
 export class TextMsg extends plugin {
   constructor () {
