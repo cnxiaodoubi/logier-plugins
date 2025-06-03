@@ -1,5 +1,12 @@
 import puppeteer from 'puppeteer'
 import { readAndParseJSON, getFunctionData, numToChinese, getImageUrl } from '../utils/getdate.js'
+import fs from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
+
+// 获取当前文件所在目录
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 export class TextMsg extends plugin {
   constructor () {
@@ -20,6 +27,7 @@ export class TextMsg extends plugin {
       ]
     })
   }
+
 
   async 今日运势 (e) {
     let jrys = await readAndParseJSON('../data/jrys.json')
@@ -113,72 +121,53 @@ async function generateFortune (e) {
   let data = await redis.get(`Yunzai:logier-plugin:${e.user_id}_jrys`)
   const fortune = JSON.parse(data).fortune
 
-  let Html = `
+
+// 1. 读取本地CSS文件内容
+const cssPath = path.join(__dirname, '../resources/css/jrys.css');
+let localCss = fs.readFileSync(cssPath, 'utf-8');
+
+// 2. 将CSS中的字体路径转换为base64内联
+const cssDir = path.dirname(cssPath); // 获取CSS文件所在目录
+localCss = localCss.replace(
+  /url\(['"]?(\.\/)?([^'")]+)['"]?\)/g,  // 匹配所有url()引用
+  (match, prefix, fontPath) => {
+    // 如果路径是相对路径(以./开头)，则基于CSS文件目录解析
+    const fullFontPath = prefix === './' 
+      ? path.join(cssDir, fontPath)
+      : path.join(cssDir, fontPath); // 如果不是./开头也尝试同一目录
+    
+    try {
+      const fontData = fs.readFileSync(fullFontPath);
+      const base64 = fontData.toString('base64');
+      
+      // 根据文件扩展名确定MIME类型
+      const extension = path.extname(fullFontPath).toLowerCase();
+      const mimeTypes = {
+        '.ttf': 'font/truetype',
+        '.woff': 'font/woff',
+        '.woff2': 'font/woff2',
+        '.eot': 'application/vnd.ms-fontobject',
+        '.otf': 'font/opentype',
+        '.svg': 'image/svg+xml'
+      };
+      
+      const mimeType = mimeTypes[extension] || 'application/octet-stream';
+      
+      return `url(data:${mimeType};base64,${base64})`;
+    } catch (err) {
+      console.error(`无法加载字体文件: ${fullFontPath}`, err);
+      return match; // 如果文件读取失败，返回原始引用
+    }
+  }
+);
+
+// 3. 使用修改后的CSS
+let Html = `
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
-  <title>运势页面</title>
-  <style>
-/* jrys.css */
-/* 定义自定义字体 */
-@font-face {
-    font-family: 'HarmonyOS';
-    src: url('https://dd.atxrom.com/font/HarmonyOS.woff2') format('woff2');
-    font-weight: normal; /* 可以添加，如果字体有特定的重量 */
-    font-style: normal;  /* 可以添加，如果字体有特定的样式（如斜体） */
-}
-
-/* 基础样式重置 */
-html, body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box; /* 添加此属性可以简化元素宽度和高度的计算 */
-    font-family: 'HarmonyOS', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
-    line-height: 2.0; /* 可以添加一个默认的行高，使文本更易读 */
-    /* 其他基础样式，如字体颜色、背景颜色等，也可以在这里设置 */
-}
-/* jrys.css */
-html {
-    background: rgba(255, 255, 255, 0.6);
-}
-.fortune {
-    width: 30%;
-    height: 65rem;
-    float: left;
-    text-align: center;
-    background: rgba(255, 255, 255, 0.6);
-}
-.content {
-    margin: 0 auto;
-    padding: 12px 12px;
-    height: 49rem;
-    max-width: 980px;
-    max-height: 1024px;
-    background: rgba(255, 255, 255, 0.6);
-    border-radius: 15px;
-    backdrop-filter: blur(3px);
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
-    writing-mode: vertical-lr;
-    text-orientation: mixed;
-}
-.image {
-    height: 65rem;
-    width: 70%;
-    float: right;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
-    text-align: center;
-}
-.image img {
-    height: 100%;
-    filter: brightness(100%);
-    overflow: hidden;
-    display: inline-block;
-    vertical-align: middle;
-    margin: 0;
-    padding: 0;
-}
-</style>
-
+  <meta charset="UTF-8">
+  <style>${localCss}</style>
 </head>
 <body>
 <div class="container">

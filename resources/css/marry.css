@@ -1,0 +1,66 @@
+ /* 自定义字体定义 */
+          @font-face {
+              font-family: 'HarmonyOS';
+              src: url('../font/HarmonyOS.woff2') format('woff2');
+              font-weight: normal; /* 明确指定字体权重，尽管默认为normal */
+              font-style: normal;  /* 明确指定字体样式，尽管默认为normal */
+          }
+          
+          /* 全局样式重置与设置 */
+          html, body {
+              margin: 0;
+              padding: 0;
+              box-sizing: border-box; /* 简化元素尺寸计算，包含padding和border */
+              font-family: 'HarmonyOS', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+              line-height: 1.6; /* 设置行高，提高文本可读性 */
+              /* 可选：设置全局字体大小、颜色等 */
+              /* font-size: 16px; */
+              /* color: #333; */
+          }
+          /* marry.css */
+          body, html {
+              background: rgba(255, 255, 255, 0.6);
+          }
+          
+          .fortune {
+              width: 30%;
+              height: 65rem;
+              float: left;
+              text-align: center;
+          }
+          
+          .fortune .content {
+              margin: 0 auto;
+              padding: 12px 12px;
+              height: 49rem;
+              max-width: 980px;
+              max-height: 1024px;
+              background: rgba(255, 255, 255, 0.6);
+              border-radius: 15px;
+              backdrop-filter: blur(3px);
+              box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+              writing-mode: vertical-rl;
+              text-orientation: mixed;
+          }
+          
+          .fortune .content p {
+              font-size: 2em;
+          }
+          
+          .image {
+              height: 65rem;
+              width: 70%;
+              float: right;
+              box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+              text-align: center;
+          }
+          
+          .image img {
+              height: 100%;
+              filter: brightness(100%);
+              overflow: hidden;
+              display: inline-block;
+              vertical-align: middle;
+              margin: 0;
+              padding: 0;
+          }
