@@ -96,29 +96,8 @@ export class TextMsg extends plugin {
     let position = favorValues.indexOf(data.favor) + 1
 
     let nickname = e.nickname ? e.nickname : e.sender.card
-
-
-
- // 1. 读取本地CSS文件内容
     const cssPath = path.join(__dirname, '../resources/css/sgin.css');
-    let localCss = fs.readFileSync(cssPath, 'utf-8');
-    const jsPath = path.join(__dirname, '../resources/js/ign.js');
-    let localJs = fs.readFileSync(jsPath, 'utf-8');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // 生成 HTML
+    let localCss = fs.readFileSync(cssPath, 'utf-8');   
     let Html = `
   <!DOCTYPE html>
 <html lang="zh">

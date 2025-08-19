@@ -207,9 +207,7 @@ localCss = localCss.replace(
     
     try {
       const fontData = fs.readFileSync(fullFontPath);
-      const base64 = fontData.toString('base64');
-      
-      // 根据文件扩展名确定MIME类型
+      const base64 = fontData.toString('base64');        
       const extension = path.extname(fullFontPath).toLowerCase();
       const mimeTypes = {
         '.ttf': 'font/truetype',
