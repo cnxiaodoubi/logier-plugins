@@ -161,7 +161,7 @@ localCss = localCss.replace(
   }
 );
 
-// 3. 使用修改后的CSS
+
 let Html = `
 <!DOCTYPE html>
 <html>
@@ -254,3 +254,4 @@ async function 占卜塔罗牌 (e, replacedMsg = '', isGPT = false) {
 
   return true
 }
+
