@@ -107,7 +107,7 @@ async function pushweather(e, pushcity) {
       }
     )
 
-    // 3. 使用修改后的CSS（保持您原始的HTML结构）
+    
     let Html = `
       <!DOCTYPE html>
       <html>
