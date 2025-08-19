@@ -156,7 +156,77 @@ export class TextMsg extends plugin {
       <p id="footer">Create By 鸢尾花插件</p> 
     </div>
   </div>
-  <script>${localJs}</script>
+   <script>
+    //这里其实就是导入了一个全局变量myimg
+    //如果想要替换，直接把这个script的src去掉
+    //然后把下面的注释取消掉
+    window.myimg = '${imageUrl}'; //里面是你图片的base64
+  </script>
+  <script>
+    Function.prototype.rereturn = function (re) {
+      return (...args) => re(this(...args));
+    };
+    window.$ = document.querySelectorAll
+      .bind(document)
+      .rereturn((list) => (call_back) => list.forEach(call_back));
+  </script>
+  <script>
+  
+    $(".bgimg")((img) => {
+      img.src = myimg;
+    });
+
+    $("#cav")((c) => drawToCanvas(c, myimg, 5));
+  
+    function drawToCanvas(canvas_blur, imgData, blur) {
+      let context = canvas_blur.getContext("2d");
+      let img = new Image();
+      img.src = imgData;
+      img.onload = function () {
+        context.clearRect(0, 0, canvas_blur.width, canvas_blur.height);
+        let img_w = img.width;
+        let img_h = img.height;
+        canvas_blur.width = img_w;
+        canvas_blur.height = img_h;
+        context.drawImage(
+          img,
+          0,
+          0,
+          img.width,
+          img.height,
+          (canvas_blur.width - img_w) / 2,
+          (canvas_blur.height - img_h) / 2,
+          img_w,
+          img_h
+        );
+        let canvas = canvas_blur;
+        let ctx = context;
+        let sum = 0;
+        let delta = 5;
+        let alpha_left = 1 / (2 * Math.PI * delta * delta);
+        let step = blur < 3 ? 1 : 2;
+        for (let y = -blur; y <= blur; y += step) {
+          for (let x = -blur; x <= blur; x += step) {
+            let weight =
+              alpha_left * Math.exp(-(x * x + y * y) / (2 * delta * delta));
+            sum += weight;
+          }
+        }
+        let count = 0;
+        for (let y = -blur; y <= blur; y += step) {
+          for (let x = -blur; x <= blur; x += step) {
+            count++;
+            ctx.globalAlpha =
+              ((alpha_left * Math.exp(-(x * x + y * y) / (2 * delta * delta))) /
+                sum) *
+              blur;
+            ctx.drawImage(canvas, x, y);
+          }
+        }
+        ctx.globalAlpha = 1;
+      };
+    }
+  </script>
 </body>
 </html>
           `
