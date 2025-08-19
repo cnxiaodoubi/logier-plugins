@@ -254,4 +254,3 @@ async function 占卜塔罗牌 (e, replacedMsg = '', isGPT = false) {
 
   return true
 }
-

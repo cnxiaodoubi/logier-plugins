@@ -207,9 +207,7 @@ localCss = localCss.replace(
     
     try {
       const fontData = fs.readFileSync(fullFontPath);
-      const base64 = fontData.toString('base64');
-      
-      // 根据文件扩展名确定MIME类型
+      const base64 = fontData.toString('base64');        
       const extension = path.extname(fullFontPath).toLowerCase();
       const mimeTypes = {
         '.ttf': 'font/truetype',
@@ -225,12 +223,12 @@ localCss = localCss.replace(
       return `url(data:${mimeType};base64,${base64})`;
     } catch (err) {
       console.error(`无法加载字体文件: ${fullFontPath}`, err);
-      return match; // 如果文件读取失败，返回原始引用
+      return match; 
     }
   }
 );
 
-// 3. 使用修改后的CSS
+
 let Html = `
 <!DOCTYPE html>
 <html>

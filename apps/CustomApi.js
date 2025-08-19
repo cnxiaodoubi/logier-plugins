@@ -8,8 +8,7 @@ function createRules () {
   for (let item of config.CustomApi) {
     apiMap[item.FunctionName] = item.imageUrls
   }
-  const regexes = Object.keys(apiMap)
-  // 如果 regexes 为空，返回一个不可能匹配的正则表达式
+  const regexes = Object.keys(apiMap)  
   return regexes.length > 0 ? regexes.join('|') : '(?!)'
 }
 
