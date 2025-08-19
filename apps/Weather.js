@@ -107,7 +107,7 @@ async function pushweather(e, pushcity) {
       }
     )
 
-  
+    
     let Html = `
       <!DOCTYPE html>
       <html>
@@ -232,6 +232,5 @@ async function getIndices (location, WeatherKey) {
   const output = result.join('\n\n')
   return output
 }
-
 
 
