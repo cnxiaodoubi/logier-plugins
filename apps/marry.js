@@ -218,8 +218,7 @@ localCss = localCss.replace(
         '.svg': 'image/svg+xml'
       };
       
-      const mimeType = mimeTypes[extension] || 'application/octet-stream';
-      
+      const mimeType = mimeTypes[extension] || 'application/octet-stream';      
       return `url(data:${mimeType};base64,${base64})`;
     } catch (err) {
       console.error(`无法加载字体文件: ${fullFontPath}`, err);
