@@ -151,12 +151,8 @@ export class TextMsg extends plugin {
   </script>
   <script>
   
-    $(".bgimg")((img) => {
-      img.src = myimg;
-    });
-
-    $("#cav")((c) => drawToCanvas(c, myimg, 5));
-  
+    $(".bgimg")((img) => {img.src = myimg;});
+    $("#cav")((c) => drawToCanvas(c, myimg, 5));  
     function drawToCanvas(canvas_blur, imgData, blur) {
       let context = canvas_blur.getContext("2d");
       let img = new Image();
