@@ -4,7 +4,6 @@ import setting from '../model/setting.js'
 function createRules () {
   const config = setting.getConfig('CustomApi')
   const apiMap = {}
-
   for (let item of config.CustomApi) {
     apiMap[item.FunctionName] = item.imageUrls
   }

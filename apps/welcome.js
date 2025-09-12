@@ -51,5 +51,3 @@ export class newcomer extends plugin {
     ])
   }
 }
-
-

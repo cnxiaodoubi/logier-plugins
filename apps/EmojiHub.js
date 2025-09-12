@@ -6,6 +6,7 @@ function createRules () {
   return regexes.join('|')
 }
 
+
 export class TextMsg extends plugin {
   constructor () {
     super({

@@ -64,6 +64,7 @@ export class TextMsg extends plugin {
           break
         }
       }
+      
 
       // 将修改后的配置写回文件
       setting.setConfig('Push', config)

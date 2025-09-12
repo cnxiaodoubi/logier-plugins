@@ -87,7 +87,6 @@ export class example extends plugin {
     }
   }
 }
-
 async function getRandomWife (e) {
   try {
     let mmap = await e.group.getMemberMap()

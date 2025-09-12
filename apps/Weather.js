@@ -106,7 +106,6 @@ async function pushweather(e, pushcity) {
         return `url(data:${mimeType};base64,${base64})`
       }
     )
-
     
     let Html = `
       <!DOCTYPE html>

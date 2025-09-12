@@ -50,7 +50,6 @@ export class greetings extends plugin {
       logger.info('[潜伏模板]key或url配置错误')
       return false
     }
-
     let sentences
     if (typeof content === 'string') {
       sentences = content.split(/(?<=[。！?;；:：])/g)

@@ -154,6 +154,7 @@ export class TextMsg extends plugin {
   }
 }
 
+
 function deleteEmoticon (e, savePath, number, name) {
   if (!fs.existsSync(savePath)) {
     e.reply('目录不存在', true)

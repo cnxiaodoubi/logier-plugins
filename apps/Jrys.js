@@ -159,7 +159,6 @@ localCss = localCss.replace(
   }
 );
 
-
 let Html = `
 <!DOCTYPE html>
 <html>

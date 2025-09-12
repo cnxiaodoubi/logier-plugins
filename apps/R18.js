@@ -15,10 +15,6 @@ export class example extends plugin {
     });
       }
 
-
-
-
-
       async 三次元 (e) {
 
         e.reply([segment.image(newsimageUrl)]);
