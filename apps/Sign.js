@@ -41,7 +41,14 @@ try {
   const hitokodata = await response.json();
   content = hitokodata.hitokoto;
 } catch {
-  content = '一言接口异常！哦啦啦啦';
+  try {
+    const response = await fetch('https://v1.atxrom.cn');
+    if (!response.ok) throw new Error();
+    const hitokodata = await response.json();
+    content = hitokodata.hitokoto;
+  } catch {
+    content = '一言全挂了 哈哈哈';
+  }
 }
 
     // 获取随机图片
