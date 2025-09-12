@@ -44,6 +44,7 @@ try {
   content = '一言接口异常！哦啦啦啦';
 }
 
+
     // 获取随机图片
     let imageUrl = await getImageUrl(this.UrlsConfig.imageUrls, './plugins/logier-plugin/resources/gallery/114388636.webp')
 
