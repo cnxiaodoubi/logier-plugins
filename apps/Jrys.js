@@ -28,7 +28,6 @@ export class TextMsg extends plugin {
     })
   }
 
-
   async 今日运势 (e) {
     let jrys = await readAndParseJSON('../data/jrys.json')
     let now = new Date().toLocaleDateString('zh-CN')

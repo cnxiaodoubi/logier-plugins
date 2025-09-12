@@ -37,7 +37,6 @@ export class example extends plugin {
 
     let notMarryToday = marrydata && !isSameDayMarry
     // let notCPToday = cpdata && !isSameDayCP;
-
     let replyMessage = ''
 
     let isRemarry = marrydata && marrydata.isRemarry ? marrydata.isRemarry : false
@@ -279,3 +278,4 @@ let Html = `
     }
   }
 }
+
