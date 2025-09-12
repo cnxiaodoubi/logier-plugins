@@ -34,9 +34,15 @@ export class TextMsg extends plugin {
     let datatime = now.toLocaleDateString('zh-CN') 
 
     // 获取一言数据
-    const response = await fetch('https://v1.hitokoto.cn')
-    const hitokodata = await response.json()
-    const content = hitokodata.hitokoto
+let content;
+try {
+  const response = await fetch('https://v1.hitokoto.cn');
+  if (!response.ok) throw new Error();
+  const hitokodata = await response.json();
+  content = hitokodata.hitokoto;
+} catch {
+  content = '无法访问';
+}
 
     // 获取随机图片
     let imageUrl = await getImageUrl(this.UrlsConfig.imageUrls, './plugins/logier-plugin/resources/gallery/114388636.webp')
