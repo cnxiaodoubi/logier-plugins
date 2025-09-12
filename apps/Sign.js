@@ -41,7 +41,7 @@ try {
   const hitokodata = await response.json();
   content = hitokodata.hitokoto;
 } catch {
-  content = '无法访问';
+  content = '一言接口异常！哦啦啦啦';
 }
 
     // 获取随机图片
